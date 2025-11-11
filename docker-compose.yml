@@ -1,0 +1,45 @@
+services:
+  servidor:
+    build:
+      context: ./reqrep
+      dockerfile: Dockerfile_servidor
+    container_name: servidor
+    ports:
+      - "5555:5555"
+    volumes:
+      - ./reqrep/data:/app/data
+
+  cliente:
+    build:
+      context: ./reqrep
+      dockerfile: Dockerfile_cliente
+    container_name: cliente
+    stdin_open: true
+    tty: true
+    depends_on:
+      - servidor
+      - proxy
+
+  proxy:
+    build:
+      context: ./proxy
+    container_name: proxy
+    ports:
+      - "5557:5557"
+      - "5558:5558"
+
+  publisher:
+    build:
+      context: ./pubsub
+      dockerfile: Dockerfile
+    container_name: publisher
+    depends_on:
+      - proxy
+
+  subscriber:
+    build:
+      context: ./pubsub
+      dockerfile: Dockerfile
+    container_name: subscriber
+    depends_on:
+      - proxy

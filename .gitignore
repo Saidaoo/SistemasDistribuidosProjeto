@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# VS Code
+.vscode/
+
+# Docker volumes
+pubsub/__pycache__/
+proxy/__pycache__/
+
+# Logs
+*.log
