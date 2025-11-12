@@ -1,9 +1,8 @@
-FROM python:3.13.7-alpine3.21
-
+FROM python:3.10-slim
 WORKDIR /app
 
+COPY servidor.py ./
 RUN pip install pyzmq
 
-COPY ./servidor.py .
-
+EXPOSE 5555
 CMD ["python", "servidor.py"]

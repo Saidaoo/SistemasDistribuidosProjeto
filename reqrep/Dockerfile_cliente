@@ -1,9 +1,7 @@
-FROM python:3.13.7-alpine3.21
-
+FROM python:3.10-slim
 WORKDIR /app
 
+COPY cliente.py ./
 RUN pip install pyzmq
-
-COPY ./cliente.py .
 
 CMD ["python", "cliente.py"]

@@ -1,45 +1,36 @@
 services:
   servidor:
-    build:
+    build: 
       context: ./reqrep
       dockerfile: Dockerfile_servidor
-    container_name: servidor
     ports:
       - "5555:5555"
+    networks:
+      - chat_network
     volumes:
       - ./reqrep/data:/app/data
+
+  proxy:
+    build: ./proxy
+    ports:
+      - "5557:5557"
+      - "5558:5558"
+    networks:
+      - chat_network
 
   cliente:
     build:
       context: ./reqrep
       dockerfile: Dockerfile_cliente
-    container_name: cliente
-    stdin_open: true
-    tty: true
+    command: python cliente.py
+    networks:
+      - chat_network
     depends_on:
       - servidor
       - proxy
+    tty: true
+    stdin_open: true
 
-  proxy:
-    build:
-      context: ./proxy
-    container_name: proxy
-    ports:
-      - "5557:5557"
-      - "5558:5558"
-
-  publisher:
-    build:
-      context: ./pubsub
-      dockerfile: Dockerfile
-    container_name: publisher
-    depends_on:
-      - proxy
-
-  subscriber:
-    build:
-      context: ./pubsub
-      dockerfile: Dockerfile
-    container_name: subscriber
-    depends_on:
-      - proxy
+networks:
+  chat_network:
+    driver: bridge

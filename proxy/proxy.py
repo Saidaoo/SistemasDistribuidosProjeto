@@ -1,15 +1,24 @@
+# proxy/proxy.py
 import zmq
 
-context = zmq.Context()
+def run_proxy():
+    """Proxy ZeroMQ para PUB/SUB"""
+    context = zmq.Context()
+    
+    # Socket para receber mensagens de publishers
+    xsub_socket = context.socket(zmq.XSUB)
+    xsub_socket.bind("tcp://*:5557")
+    
+    # Socket para enviar mensagens para subscribers
+    xpub_socket = context.socket(zmq.XPUB)
+    xpub_socket.bind("tcp://*:5558")
+    
+    print("🚀 Proxy PUB/SUB iniciado:")
+    print("XSUB (Publishers) na porta 5557")
+    print("XPUB (Subscribers) na porta 5558")
+    
+    # Proxy que conecta XSUB e XPUB
+    zmq.proxy(xsub_socket, xpub_socket)
 
-pub = context.socket(zmq.XPUB)
-pub.bind("tcp://*:5556")
-
-sub = context.socket(zmq.XSUB)
-sub.bind("tcp://*:5555")
-
-zmq.proxy(pub, sub)
-
-pub.close()
-sub.close()
-context.close()
+if __name__ == "__main__":
+    run_proxy()
