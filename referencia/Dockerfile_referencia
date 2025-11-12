@@ -1,0 +1,16 @@
+# referencia/Dockerfile_referencia
+FROM node:20-slim
+
+WORKDIR /app
+
+# Copia o script
+COPY referencia.js .
+
+# Inicializa o npm e instala dependências necessárias
+RUN npm init -y && npm install zeromq @msgpack/msgpack
+
+# Expõe a porta
+EXPOSE 6000
+
+# Comando para rodar o servidor
+CMD ["node", "referencia.js"]

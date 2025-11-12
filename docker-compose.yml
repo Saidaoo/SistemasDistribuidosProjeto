@@ -1,0 +1,54 @@
+services:
+  servidor:
+    build: 
+      context: ./reqrep
+      dockerfile: Dockerfile_servidor
+    container_name: bbs-servidor
+    ports:
+      - "5555:5555"
+    networks:
+      - chat_network
+    volumes:
+      - ./reqrep/data:/app/data
+
+  proxy:
+    build: ./proxy
+    container_name: bbs-proxy
+    ports:
+      - "5557:5557"
+      - "5558:5558"
+    networks:
+      - chat_network
+
+  cliente-c:
+    build:
+      context: ./reqrep
+      dockerfile: Dockerfile_cliente_c
+    container_name: bbs-cliente-c
+    networks:
+      - chat_network
+    depends_on:
+      - servidor
+      - proxy
+    stdin_open: true
+    tty: true
+    environment:
+      - SERVER_HOST=servidor
+      - SERVER_PORT=5555
+      - PROXY_XSUB=proxy:5557
+      - PROXY_XPUB=proxy:5558
+
+  referencia:
+    build:
+      context: ./referencia
+      dockerfile: Dockerfile_referencia
+    container_name: bbs-referencia
+    ports:
+      - "6000:6000"
+    networks:
+      - chat_network   # ✅ Aqui é separado, no mesmo nível de cliente-c
+  
+
+networks:
+  chat_network:
+    driver: bridge

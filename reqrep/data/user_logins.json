@@ -1,0 +1,337 @@
+[
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T02:58:49.056060",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T02:59:18.415927",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T03:04:50.533877",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T03:04:54.828115",
+    "type": "login"
+  },
+  {
+    "user": "Gabriel",
+    "timestamp": "2025-11-12T03:30:44.932218",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T03:31:06.674083",
+    "type": "login"
+  },
+  {
+    "user": "Joao",
+    "timestamp": "2025-11-12T14:02:05.259332",
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": "2025-11-12T14:02:55.211456",
+    "type": "login"
+  },
+  {
+    "user": "Saidi",
+    "timestamp": "2025-11-12T14:12:30.130168",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T14:12:58.024218",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T14:13:26.292913",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T14:15:28.969050",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T14:15:35.037119",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T15:06:55",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T15:06:58",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T15:47:56",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T15:48:00",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T15:57:30",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T15:57:32",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T16:02:29",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T16:02:31",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T16:05:41",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T16:05:43",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T16:09:58",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T16:10:00",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T16:13:06",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T16:13:08",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T16:16:25",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T16:16:27",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T16:19:31",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T16:19:34",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T16:21:17",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T16:21:20",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T16:25:17",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T16:25:19",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T16:28:53",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T16:28:56",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T16:35:33",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T16:35:35",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T18:28:34",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T18:28:36",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T18:32:24",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T18:32:27",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T18:41:31",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T18:41:33",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T18:43:34",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T18:44:09",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T18:52:36",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T18:52:39",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T18:58:43",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T18:58:45",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T19:03:05",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T19:03:07",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T19:05:12",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T19:05:16",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T19:18:00",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T19:18:02",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T19:33:53",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T19:33:56",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T19:37:41",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T19:37:44",
+    "type": "login"
+  },
+  {
+    "user": "docker attach bbs-cliente-c",
+    "timestamp": "2025-11-12T20:51:22",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T20:52:15",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T20:58:50",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T20:59:52",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T22:22:34",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T22:27:04",
+    "type": "login"
+  }
+]
