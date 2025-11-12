@@ -1,44 +1,32 @@
-# Sistema BBS/IRC - Parte 2 (PUB-SUB)
+# Sistema BBS/IRC - Parte 2: Comunicação PUB-SUB
 
-Extensão do sistema com comunicação em tempo real via PUB-SUB.
+## 📋 Funcionalidades Implementadas
 
-## 🚀 Como Usar
+### Serviços PUB-SUB:
+- 📢 `publish` - Publicação de mensagens em canais
+- 💌 `message` - Mensagens diretas entre usuários
+- 🔄 Proxy dedicado - Roteamento de mensagens
+
+### Serviços REQ-REP (mantidos):
+- 🔐 `login` - Autenticação de usuários
+- 👥 `users` - Listagem de usuários cadastrados  
+- ➕ `channel` - Criação de novos canais
+- 📺 `channels` - Listagem de canais disponíveis
+
+### Persistência:
+- 💾 Mensagens trocadas (novo)
+- 💾 Usuários registrados
+- 💾 Canais criados
+- 💾 Histórico de logins
+- 💾 Formato JSON
+
+## 🚀 Como Executar
 
 ```bash
-# Iniciar sistema
-docker-compose up -d
+# 1. Iniciar servidor e proxy
+docker-compose up -d --build
 
-# Conectar usuário
+# 2. Conectar cliente (em outro terminal)
 docker-compose run --rm cliente
 
-📋 Funcionalidades
-🔄 PUB-SUB (Novo)
-Publicar em canais - Mensagens em tempo real
-
-Mensagens diretas - Chat privado entre usuários
-
-Proxy dedicado - Roteamento de mensagens
-
-✅ REQ-REP (Parte 1)
-Login de usuários
-
-Listar usuários/canais
-
-Criar canais
-
-Persistência em JSON
-
-📦 Serviços
-servidor (5555) - REQ-REP + PUB
-
-proxy (5557/5558) - Roteamento PUB-SUB
-
-cliente - Interface interativa
-
-💾 Dados
-Usuários, canais, logins e mensagens persistidos em JSON
-
-Histórico completo de conversas
-
-Parte 1: feature/reqrep
-Repositório: https://github.com/Saidaoo/SistemasDistribuidosProjeto
+# 3. Seguir menu interativo
