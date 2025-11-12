@@ -1,0 +1,27 @@
+[
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T02:58:49.056060",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T02:59:18.415927",
+    "type": "login"
+  },
+  {
+    "user": "Bob",
+    "timestamp": "2025-11-12T03:04:50.533877",
+    "type": "login"
+  },
+  {
+    "user": "Alice",
+    "timestamp": "2025-11-12T03:04:54.828115",
+    "type": "login"
+  },
+  {
+    "user": "Carlos",
+    "timestamp": "2025-11-12T03:17:26.770401",
+    "type": "login"
+  }
+]

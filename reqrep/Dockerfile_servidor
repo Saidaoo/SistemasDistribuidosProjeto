@@ -1,0 +1,8 @@
+FROM python:3.10-slim
+WORKDIR /app
+
+COPY servidor.py ./
+RUN pip install pyzmq
+
+EXPOSE 5555
+CMD ["python", "servidor.py"]

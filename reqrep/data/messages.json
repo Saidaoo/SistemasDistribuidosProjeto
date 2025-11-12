@@ -1,0 +1,2690 @@
+[
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Que dia lindo! [#1]",
+    "timestamp": "2025-11-12T02:33:56.728579"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Mais um teste aqui [#1]",
+    "timestamp": "2025-11-12T02:33:57.009673"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Alguma novidade? [#2]",
+    "timestamp": "2025-11-12T02:34:00.348225"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Estou testando o sistema [#2]",
+    "timestamp": "2025-11-12T02:34:00.362740"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Algu\u00e9m online? [#3]",
+    "timestamp": "2025-11-12T02:34:02.355590"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Que dia lindo! [#3]",
+    "timestamp": "2025-11-12T02:34:02.370123"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Algu\u00e9m online? [#4]",
+    "timestamp": "2025-11-12T02:34:04.363092"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Alguma novidade? [#4]",
+    "timestamp": "2025-11-12T02:34:04.377658"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Estou testando o sistema [#5]",
+    "timestamp": "2025-11-12T02:34:06.371334"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Estou testando o sistema [#5]",
+    "timestamp": "2025-11-12T02:34:06.386414"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Que dia lindo! [#6]",
+    "timestamp": "2025-11-12T02:34:08.378674"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Mais um teste aqui [#6]",
+    "timestamp": "2025-11-12T02:34:08.393269"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Estou testando o sistema [#7]",
+    "timestamp": "2025-11-12T02:34:10.386324"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "\u00daltima mensagem do ciclo [#7]",
+    "timestamp": "2025-11-12T02:34:10.401014"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Alguma novidade? [#8]",
+    "timestamp": "2025-11-12T02:34:12.394252"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Como voc\u00eas est\u00e3o? [#8]",
+    "timestamp": "2025-11-12T02:34:12.408484"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Algu\u00e9m online? [#9]",
+    "timestamp": "2025-11-12T02:34:14.401864"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Que dia lindo! [#9]",
+    "timestamp": "2025-11-12T02:34:14.416225"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Como voc\u00eas est\u00e3o? [#10]",
+    "timestamp": "2025-11-12T02:34:16.410272"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "\u00daltima mensagem do ciclo [#10]",
+    "timestamp": "2025-11-12T02:34:16.423662"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Que dia lindo! [#1]",
+    "timestamp": "2025-11-12T02:34:23.417993"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Estou testando o sistema [#1]",
+    "timestamp": "2025-11-12T02:34:23.434864"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Alguma novidade? [#2]",
+    "timestamp": "2025-11-12T02:34:25.425519"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Mais um teste aqui [#2]",
+    "timestamp": "2025-11-12T02:34:25.442397"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Como voc\u00eas est\u00e3o? [#3]",
+    "timestamp": "2025-11-12T02:34:27.433711"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Mensagem autom\u00e1tica [#3]",
+    "timestamp": "2025-11-12T02:34:27.449775"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Alguma novidade? [#4]",
+    "timestamp": "2025-11-12T02:34:29.442188"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Ol\u00e1 pessoal! [#4]",
+    "timestamp": "2025-11-12T02:34:29.457365"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Mais um teste aqui [#5]",
+    "timestamp": "2025-11-12T02:34:31.450250"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Que dia lindo! [#5]",
+    "timestamp": "2025-11-12T02:34:31.465074"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Como voc\u00eas est\u00e3o? [#6]",
+    "timestamp": "2025-11-12T02:34:33.458226"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Como voc\u00eas est\u00e3o? [#6]",
+    "timestamp": "2025-11-12T02:34:33.473498"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Algu\u00e9m online? [#7]",
+    "timestamp": "2025-11-12T02:34:35.465781"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Como voc\u00eas est\u00e3o? [#7]",
+    "timestamp": "2025-11-12T02:34:35.480944"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "\u00daltima mensagem do ciclo [#8]",
+    "timestamp": "2025-11-12T02:34:37.473747"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "\u00daltima mensagem do ciclo [#8]",
+    "timestamp": "2025-11-12T02:34:37.488421"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Que dia lindo! [#9]",
+    "timestamp": "2025-11-12T02:34:39.482048"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Mais um teste aqui [#9]",
+    "timestamp": "2025-11-12T02:34:39.495834"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Alguma novidade? [#10]",
+    "timestamp": "2025-11-12T02:34:41.489700"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Mensagem autom\u00e1tica [#10]",
+    "timestamp": "2025-11-12T02:34:41.503326"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Algu\u00e9m online? [#1]",
+    "timestamp": "2025-11-12T02:34:48.502538"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Mensagem autom\u00e1tica [#1]",
+    "timestamp": "2025-11-12T02:34:48.516510"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Mensagem autom\u00e1tica [#2]",
+    "timestamp": "2025-11-12T02:34:50.510631"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Que dia lindo! [#2]",
+    "timestamp": "2025-11-12T02:34:50.523716"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Como voc\u00eas est\u00e3o? [#3]",
+    "timestamp": "2025-11-12T02:34:52.517490"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Mensagem autom\u00e1tica [#3]",
+    "timestamp": "2025-11-12T02:34:52.533285"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Ol\u00e1 pessoal! [#4]",
+    "timestamp": "2025-11-12T02:34:54.524515"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Mensagem autom\u00e1tica [#4]",
+    "timestamp": "2025-11-12T02:34:54.541911"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Mensagem autom\u00e1tica [#5]",
+    "timestamp": "2025-11-12T02:34:56.533310"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "\u00daltima mensagem do ciclo [#5]",
+    "timestamp": "2025-11-12T02:34:56.549658"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Alguma novidade? [#6]",
+    "timestamp": "2025-11-12T02:34:58.541200"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "\u00daltima mensagem do ciclo [#6]",
+    "timestamp": "2025-11-12T02:34:58.557387"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Funcionando perfeitamente! [#7]",
+    "timestamp": "2025-11-12T02:35:00.549188"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Estou testando o sistema [#7]",
+    "timestamp": "2025-11-12T02:35:00.565794"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Ol\u00e1 pessoal! [#8]",
+    "timestamp": "2025-11-12T02:35:02.557094"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Estou testando o sistema [#8]",
+    "timestamp": "2025-11-12T02:35:02.573620"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Mensagem autom\u00e1tica [#9]",
+    "timestamp": "2025-11-12T02:35:04.565331"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Estou testando o sistema [#9]",
+    "timestamp": "2025-11-12T02:35:04.581623"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "\u00daltima mensagem do ciclo [#10]",
+    "timestamp": "2025-11-12T02:35:06.573327"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Mensagem autom\u00e1tica [#10]",
+    "timestamp": "2025-11-12T02:35:06.589291"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Estou testando o sistema [#1]",
+    "timestamp": "2025-11-12T02:35:13.586625"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#1]",
+    "timestamp": "2025-11-12T02:35:13.601969"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#2]",
+    "timestamp": "2025-11-12T02:35:15.595315"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#2]",
+    "timestamp": "2025-11-12T02:35:15.609677"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Estou testando o sistema [#3]",
+    "timestamp": "2025-11-12T02:35:17.604002"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#3]",
+    "timestamp": "2025-11-12T02:35:17.619047"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#4]",
+    "timestamp": "2025-11-12T02:35:19.611966"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#4]",
+    "timestamp": "2025-11-12T02:35:19.624524"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#5]",
+    "timestamp": "2025-11-12T02:35:21.620394"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Alguma novidade? [#5]",
+    "timestamp": "2025-11-12T02:35:21.634710"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#6]",
+    "timestamp": "2025-11-12T02:35:23.627055"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Alguma novidade? [#6]",
+    "timestamp": "2025-11-12T02:35:23.640981"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#7]",
+    "timestamp": "2025-11-12T02:35:25.635510"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#7]",
+    "timestamp": "2025-11-12T02:35:25.649111"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#8]",
+    "timestamp": "2025-11-12T02:35:27.643727"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Estou testando o sistema [#8]",
+    "timestamp": "2025-11-12T02:35:27.657987"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Alguma novidade? [#9]",
+    "timestamp": "2025-11-12T02:35:29.651901"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#9]",
+    "timestamp": "2025-11-12T02:35:29.666197"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Que dia lindo! [#10]",
+    "timestamp": "2025-11-12T02:35:31.660168"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#10]",
+    "timestamp": "2025-11-12T02:35:31.673744"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "tech",
+    "message": "\u00daltima mensagem do ciclo [#1]",
+    "timestamp": "2025-11-12T02:35:38.673332"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Estou testando o sistema [#1]",
+    "timestamp": "2025-11-12T02:35:38.687368"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "tech",
+    "message": "Como voc\u00eas est\u00e3o? [#2]",
+    "timestamp": "2025-11-12T02:35:40.681585"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Que dia lindo! [#2]",
+    "timestamp": "2025-11-12T02:35:40.695061"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "tech",
+    "message": "Estou testando o sistema [#3]",
+    "timestamp": "2025-11-12T02:35:42.690056"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Algu\u00e9m online? [#3]",
+    "timestamp": "2025-11-12T02:35:42.702991"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "tech",
+    "message": "Que dia lindo! [#4]",
+    "timestamp": "2025-11-12T02:35:44.696689"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Alguma novidade? [#4]",
+    "timestamp": "2025-11-12T02:35:44.711087"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "tech",
+    "message": "Estou testando o sistema [#5]",
+    "timestamp": "2025-11-12T02:35:46.705046"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Que dia lindo! [#5]",
+    "timestamp": "2025-11-12T02:35:46.719490"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "tech",
+    "message": "Estou testando o sistema [#6]",
+    "timestamp": "2025-11-12T02:35:48.712997"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Como voc\u00eas est\u00e3o? [#6]",
+    "timestamp": "2025-11-12T02:35:48.727078"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "tech",
+    "message": "Alguma novidade? [#7]",
+    "timestamp": "2025-11-12T02:35:50.721025"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Mensagem autom\u00e1tica [#7]",
+    "timestamp": "2025-11-12T02:35:50.734847"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "tech",
+    "message": "Mais um teste aqui [#8]",
+    "timestamp": "2025-11-12T02:35:52.728316"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Como voc\u00eas est\u00e3o? [#8]",
+    "timestamp": "2025-11-12T02:35:52.742743"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "tech",
+    "message": "Que dia lindo! [#9]",
+    "timestamp": "2025-11-12T02:35:54.736926"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Mais um teste aqui [#9]",
+    "timestamp": "2025-11-12T02:35:54.750660"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "tech",
+    "message": "Mensagem autom\u00e1tica [#10]",
+    "timestamp": "2025-11-12T02:35:56.745336"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Como voc\u00eas est\u00e3o? [#10]",
+    "timestamp": "2025-11-12T02:35:56.760023"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "\u00daltima mensagem do ciclo [#1]",
+    "timestamp": "2025-11-12T02:36:03.759249"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Funcionando perfeitamente! [#1]",
+    "timestamp": "2025-11-12T02:36:03.773394"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "\u00daltima mensagem do ciclo [#2]",
+    "timestamp": "2025-11-12T02:36:05.768046"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Alguma novidade? [#2]",
+    "timestamp": "2025-11-12T02:36:05.781595"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Estou testando o sistema [#3]",
+    "timestamp": "2025-11-12T02:36:07.776704"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Algu\u00e9m online? [#3]",
+    "timestamp": "2025-11-12T02:36:07.791027"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Alguma novidade? [#4]",
+    "timestamp": "2025-11-12T02:36:09.785843"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "\u00daltima mensagem do ciclo [#4]",
+    "timestamp": "2025-11-12T02:36:09.800053"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Mais um teste aqui [#5]",
+    "timestamp": "2025-11-12T02:36:11.794744"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Que dia lindo! [#5]",
+    "timestamp": "2025-11-12T02:36:11.808780"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "\u00daltima mensagem do ciclo [#6]",
+    "timestamp": "2025-11-12T02:36:13.803717"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Estou testando o sistema [#6]",
+    "timestamp": "2025-11-12T02:36:13.818136"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Ol\u00e1 pessoal! [#7]",
+    "timestamp": "2025-11-12T02:36:15.812426"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Funcionando perfeitamente! [#7]",
+    "timestamp": "2025-11-12T02:36:15.826236"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Algu\u00e9m online? [#8]",
+    "timestamp": "2025-11-12T02:36:17.821896"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Que dia lindo! [#8]",
+    "timestamp": "2025-11-12T02:36:17.835335"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Mais um teste aqui [#9]",
+    "timestamp": "2025-11-12T02:36:19.830907"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Funcionando perfeitamente! [#9]",
+    "timestamp": "2025-11-12T02:36:19.845919"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Ol\u00e1 pessoal! [#10]",
+    "timestamp": "2025-11-12T02:36:21.839582"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Alguma novidade? [#10]",
+    "timestamp": "2025-11-12T02:36:21.854099"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Ol\u00e1 pessoal! [#1]",
+    "timestamp": "2025-11-12T02:36:28.848543"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Algu\u00e9m online? [#1]",
+    "timestamp": "2025-11-12T02:36:28.866893"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Mensagem autom\u00e1tica [#2]",
+    "timestamp": "2025-11-12T02:36:30.857519"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Mais um teste aqui [#2]",
+    "timestamp": "2025-11-12T02:36:30.874892"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "\u00daltima mensagem do ciclo [#3]",
+    "timestamp": "2025-11-12T02:36:32.866071"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Ol\u00e1 pessoal! [#3]",
+    "timestamp": "2025-11-12T02:36:32.883133"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Algu\u00e9m online? [#4]",
+    "timestamp": "2025-11-12T02:36:34.874864"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Ol\u00e1 pessoal! [#4]",
+    "timestamp": "2025-11-12T02:36:34.891299"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Funcionando perfeitamente! [#5]",
+    "timestamp": "2025-11-12T02:36:36.884047"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Algu\u00e9m online? [#5]",
+    "timestamp": "2025-11-12T02:36:36.899438"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Algu\u00e9m online? [#6]",
+    "timestamp": "2025-11-12T02:36:38.893601"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Mensagem autom\u00e1tica [#6]",
+    "timestamp": "2025-11-12T02:36:38.915065"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Estou testando o sistema [#7]",
+    "timestamp": "2025-11-12T02:36:40.902143"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Alguma novidade? [#7]",
+    "timestamp": "2025-11-12T02:36:40.923610"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Mensagem autom\u00e1tica [#8]",
+    "timestamp": "2025-11-12T02:36:42.911447"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Que dia lindo! [#8]",
+    "timestamp": "2025-11-12T02:36:42.931747"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Mais um teste aqui [#9]",
+    "timestamp": "2025-11-12T02:36:44.920506"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Mais um teste aqui [#9]",
+    "timestamp": "2025-11-12T02:36:44.940179"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Mensagem autom\u00e1tica [#10]",
+    "timestamp": "2025-11-12T02:36:46.929259"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Mensagem autom\u00e1tica [#10]",
+    "timestamp": "2025-11-12T02:36:46.948325"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Mensagem autom\u00e1tica [#1]",
+    "timestamp": "2025-11-12T02:36:53.942580"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Estou testando o sistema [#1]",
+    "timestamp": "2025-11-12T02:36:53.962220"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Mensagem autom\u00e1tica [#2]",
+    "timestamp": "2025-11-12T02:36:55.951314"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Que dia lindo! [#2]",
+    "timestamp": "2025-11-12T02:36:55.970537"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Alguma novidade? [#3]",
+    "timestamp": "2025-11-12T02:36:57.960952"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Funcionando perfeitamente! [#3]",
+    "timestamp": "2025-11-12T02:36:57.978813"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Como voc\u00eas est\u00e3o? [#4]",
+    "timestamp": "2025-11-12T02:36:59.970044"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Alguma novidade? [#4]",
+    "timestamp": "2025-11-12T02:36:59.987804"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Mensagem autom\u00e1tica [#5]",
+    "timestamp": "2025-11-12T02:37:01.979390"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Como voc\u00eas est\u00e3o? [#5]",
+    "timestamp": "2025-11-12T02:37:01.996392"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Alguma novidade? [#6]",
+    "timestamp": "2025-11-12T02:37:03.988994"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Estou testando o sistema [#6]",
+    "timestamp": "2025-11-12T02:37:04.005255"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Ol\u00e1 pessoal! [#7]",
+    "timestamp": "2025-11-12T02:37:05.997986"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "\u00daltima mensagem do ciclo [#7]",
+    "timestamp": "2025-11-12T02:37:06.013870"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Que dia lindo! [#8]",
+    "timestamp": "2025-11-12T02:37:08.007258"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Ol\u00e1 pessoal! [#8]",
+    "timestamp": "2025-11-12T02:37:08.022834"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Alguma novidade? [#9]",
+    "timestamp": "2025-11-12T02:37:10.016453"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Mais um teste aqui [#9]",
+    "timestamp": "2025-11-12T02:37:10.031298"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "sports",
+    "message": "Alguma novidade? [#10]",
+    "timestamp": "2025-11-12T02:37:12.025816"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "sports",
+    "message": "Alguma novidade? [#10]",
+    "timestamp": "2025-11-12T02:37:12.040889"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#1]",
+    "timestamp": "2025-11-12T02:37:19.038870"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Funcionando perfeitamente! [#1]",
+    "timestamp": "2025-11-12T02:37:19.054491"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mais um teste aqui [#2]",
+    "timestamp": "2025-11-12T02:37:21.047638"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Estou testando o sistema [#2]",
+    "timestamp": "2025-11-12T02:37:21.063162"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mais um teste aqui [#3]",
+    "timestamp": "2025-11-12T02:37:23.055794"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Funcionando perfeitamente! [#3]",
+    "timestamp": "2025-11-12T02:37:23.071045"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Que dia lindo! [#4]",
+    "timestamp": "2025-11-12T02:37:25.065898"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "\u00daltima mensagem do ciclo [#4]",
+    "timestamp": "2025-11-12T02:37:25.081511"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#5]",
+    "timestamp": "2025-11-12T02:37:27.075747"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Algu\u00e9m online? [#5]",
+    "timestamp": "2025-11-12T02:37:27.089329"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#6]",
+    "timestamp": "2025-11-12T02:37:29.085821"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Algu\u00e9m online? [#6]",
+    "timestamp": "2025-11-12T02:37:29.100172"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#7]",
+    "timestamp": "2025-11-12T02:37:31.094837"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Ol\u00e1 pessoal! [#7]",
+    "timestamp": "2025-11-12T02:37:31.108739"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Que dia lindo! [#8]",
+    "timestamp": "2025-11-12T02:37:33.103822"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Algu\u00e9m online? [#8]",
+    "timestamp": "2025-11-12T02:37:33.119037"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#9]",
+    "timestamp": "2025-11-12T02:37:35.113375"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Estou testando o sistema [#9]",
+    "timestamp": "2025-11-12T02:37:35.127722"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Que dia lindo! [#10]",
+    "timestamp": "2025-11-12T02:37:37.122548"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Algu\u00e9m online? [#10]",
+    "timestamp": "2025-11-12T02:37:37.139518"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Ol\u00e1 pessoal! [#1]",
+    "timestamp": "2025-11-12T02:37:44.136640"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Mais um teste aqui [#1]",
+    "timestamp": "2025-11-12T02:37:44.153312"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Alguma novidade? [#2]",
+    "timestamp": "2025-11-12T02:37:46.145527"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Que dia lindo! [#2]",
+    "timestamp": "2025-11-12T02:37:46.162824"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Ol\u00e1 pessoal! [#3]",
+    "timestamp": "2025-11-12T02:37:48.155815"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#3]",
+    "timestamp": "2025-11-12T02:37:48.172174"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Algu\u00e9m online? [#4]",
+    "timestamp": "2025-11-12T02:37:50.164899"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#4]",
+    "timestamp": "2025-11-12T02:37:50.180713"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Como voc\u00eas est\u00e3o? [#5]",
+    "timestamp": "2025-11-12T02:37:52.174095"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Estou testando o sistema [#5]",
+    "timestamp": "2025-11-12T02:37:52.189339"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Como voc\u00eas est\u00e3o? [#6]",
+    "timestamp": "2025-11-12T02:37:54.182461"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#6]",
+    "timestamp": "2025-11-12T02:37:54.197985"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Funcionando perfeitamente! [#7]",
+    "timestamp": "2025-11-12T02:37:56.192058"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#7]",
+    "timestamp": "2025-11-12T02:37:56.206723"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Estou testando o sistema [#8]",
+    "timestamp": "2025-11-12T02:37:58.201621"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Alguma novidade? [#8]",
+    "timestamp": "2025-11-12T02:37:58.217554"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Funcionando perfeitamente! [#9]",
+    "timestamp": "2025-11-12T02:38:00.211920"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Estou testando o sistema [#9]",
+    "timestamp": "2025-11-12T02:38:00.228138"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Ol\u00e1 pessoal! [#10]",
+    "timestamp": "2025-11-12T02:38:02.221643"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Ol\u00e1 pessoal! [#10]",
+    "timestamp": "2025-11-12T02:38:02.238199"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#1]",
+    "timestamp": "2025-11-12T02:38:09.236915"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Que dia lindo! [#1]",
+    "timestamp": "2025-11-12T02:38:09.253652"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Funcionando perfeitamente! [#2]",
+    "timestamp": "2025-11-12T02:38:11.247366"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Estou testando o sistema [#2]",
+    "timestamp": "2025-11-12T02:38:11.263173"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Ol\u00e1 pessoal! [#3]",
+    "timestamp": "2025-11-12T02:38:13.257023"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Ol\u00e1 pessoal! [#3]",
+    "timestamp": "2025-11-12T02:38:13.272646"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#4]",
+    "timestamp": "2025-11-12T02:38:15.266467"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Estou testando o sistema [#4]",
+    "timestamp": "2025-11-12T02:38:15.281680"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#5]",
+    "timestamp": "2025-11-12T02:38:17.275960"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Mais um teste aqui [#5]",
+    "timestamp": "2025-11-12T02:38:17.291619"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#6]",
+    "timestamp": "2025-11-12T02:38:19.286603"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Estou testando o sistema [#6]",
+    "timestamp": "2025-11-12T02:38:19.303402"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Ol\u00e1 pessoal! [#7]",
+    "timestamp": "2025-11-12T02:38:21.296112"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Algu\u00e9m online? [#7]",
+    "timestamp": "2025-11-12T02:38:21.311833"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Funcionando perfeitamente! [#8]",
+    "timestamp": "2025-11-12T02:38:23.304608"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Que dia lindo! [#8]",
+    "timestamp": "2025-11-12T02:38:23.320361"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#9]",
+    "timestamp": "2025-11-12T02:38:25.314166"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Estou testando o sistema [#9]",
+    "timestamp": "2025-11-12T02:38:25.330086"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#10]",
+    "timestamp": "2025-11-12T02:38:27.324311"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "tech",
+    "message": "Estou testando o sistema [#10]",
+    "timestamp": "2025-11-12T02:38:27.339546"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#1]",
+    "timestamp": "2025-11-12T02:38:34.339471"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Mais um teste aqui [#1]",
+    "timestamp": "2025-11-12T02:38:34.357307"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#2]",
+    "timestamp": "2025-11-12T02:38:36.349729"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Funcionando perfeitamente! [#2]",
+    "timestamp": "2025-11-12T02:38:36.367666"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#3]",
+    "timestamp": "2025-11-12T02:38:38.359688"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Algu\u00e9m online? [#3]",
+    "timestamp": "2025-11-12T02:38:38.376826"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#4]",
+    "timestamp": "2025-11-12T02:38:40.370137"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Algu\u00e9m online? [#4]",
+    "timestamp": "2025-11-12T02:38:40.390501"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mais um teste aqui [#5]",
+    "timestamp": "2025-11-12T02:38:42.379860"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Ol\u00e1 pessoal! [#5]",
+    "timestamp": "2025-11-12T02:38:42.400094"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Funcionando perfeitamente! [#6]",
+    "timestamp": "2025-11-12T02:38:44.389770"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Mais um teste aqui [#6]",
+    "timestamp": "2025-11-12T02:38:44.409431"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Alguma novidade? [#7]",
+    "timestamp": "2025-11-12T02:38:46.400192"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "\u00daltima mensagem do ciclo [#7]",
+    "timestamp": "2025-11-12T02:38:46.419615"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#8]",
+    "timestamp": "2025-11-12T02:38:48.410123"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Algu\u00e9m online? [#8]",
+    "timestamp": "2025-11-12T02:38:48.428793"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#9]",
+    "timestamp": "2025-11-12T02:38:50.420729"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Funcionando perfeitamente! [#9]",
+    "timestamp": "2025-11-12T02:38:50.438472"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#10]",
+    "timestamp": "2025-11-12T02:38:52.429270"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Algu\u00e9m online? [#10]",
+    "timestamp": "2025-11-12T02:38:52.446338"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Funcionando perfeitamente! [#1]",
+    "timestamp": "2025-11-12T02:38:59.445219"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#1]",
+    "timestamp": "2025-11-12T02:38:59.462088"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Que dia lindo! [#2]",
+    "timestamp": "2025-11-12T02:39:01.456520"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Ol\u00e1 pessoal! [#2]",
+    "timestamp": "2025-11-12T02:39:01.473172"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Estou testando o sistema [#3]",
+    "timestamp": "2025-11-12T02:39:03.466644"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Funcionando perfeitamente! [#3]",
+    "timestamp": "2025-11-12T02:39:03.482916"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Funcionando perfeitamente! [#4]",
+    "timestamp": "2025-11-12T02:39:05.476724"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Mais um teste aqui [#4]",
+    "timestamp": "2025-11-12T02:39:05.493017"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Que dia lindo! [#5]",
+    "timestamp": "2025-11-12T02:39:07.487280"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#5]",
+    "timestamp": "2025-11-12T02:39:07.503213"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#6]",
+    "timestamp": "2025-11-12T02:39:09.497460"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Mais um teste aqui [#6]",
+    "timestamp": "2025-11-12T02:39:09.514306"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#7]",
+    "timestamp": "2025-11-12T02:39:11.507620"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#7]",
+    "timestamp": "2025-11-12T02:39:11.524060"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Alguma novidade? [#8]",
+    "timestamp": "2025-11-12T02:39:13.517967"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#8]",
+    "timestamp": "2025-11-12T02:39:13.535122"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mais um teste aqui [#9]",
+    "timestamp": "2025-11-12T02:39:15.528321"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Ol\u00e1 pessoal! [#9]",
+    "timestamp": "2025-11-12T02:39:15.544689"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Alguma novidade? [#10]",
+    "timestamp": "2025-11-12T02:39:17.538570"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Alguma novidade? [#10]",
+    "timestamp": "2025-11-12T02:39:17.554663"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Que dia lindo! [#1]",
+    "timestamp": "2025-11-12T02:39:24.552721"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#1]",
+    "timestamp": "2025-11-12T02:39:24.568900"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Ol\u00e1 pessoal! [#2]",
+    "timestamp": "2025-11-12T02:39:26.563952"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#2]",
+    "timestamp": "2025-11-12T02:39:26.578643"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#3]",
+    "timestamp": "2025-11-12T02:39:28.574752"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Ol\u00e1 pessoal! [#3]",
+    "timestamp": "2025-11-12T02:39:28.591162"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#4]",
+    "timestamp": "2025-11-12T02:39:30.585381"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#4]",
+    "timestamp": "2025-11-12T02:39:30.602123"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#5]",
+    "timestamp": "2025-11-12T02:39:32.595566"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Que dia lindo! [#5]",
+    "timestamp": "2025-11-12T02:39:32.612192"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#6]",
+    "timestamp": "2025-11-12T02:39:34.606838"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Que dia lindo! [#6]",
+    "timestamp": "2025-11-12T02:39:34.625127"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#7]",
+    "timestamp": "2025-11-12T02:39:36.617435"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#7]",
+    "timestamp": "2025-11-12T02:39:36.634997"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mais um teste aqui [#8]",
+    "timestamp": "2025-11-12T02:39:38.627886"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#8]",
+    "timestamp": "2025-11-12T02:39:38.645208"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Alguma novidade? [#9]",
+    "timestamp": "2025-11-12T02:39:40.638799"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Mais um teste aqui [#9]",
+    "timestamp": "2025-11-12T02:39:40.657002"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#10]",
+    "timestamp": "2025-11-12T02:39:42.650267"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "random",
+    "message": "Mais um teste aqui [#10]",
+    "timestamp": "2025-11-12T02:39:42.667425"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Estou testando o sistema [#1]",
+    "timestamp": "2025-11-12T02:39:49.661405"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Alguma novidade? [#1]",
+    "timestamp": "2025-11-12T02:39:49.682295"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Que dia lindo! [#2]",
+    "timestamp": "2025-11-12T02:39:51.672188"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Que dia lindo! [#2]",
+    "timestamp": "2025-11-12T02:39:51.693048"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "\u00daltima mensagem do ciclo [#3]",
+    "timestamp": "2025-11-12T02:39:53.683068"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "\u00daltima mensagem do ciclo [#3]",
+    "timestamp": "2025-11-12T02:39:53.702796"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Funcionando perfeitamente! [#4]",
+    "timestamp": "2025-11-12T02:39:55.693940"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "\u00daltima mensagem do ciclo [#4]",
+    "timestamp": "2025-11-12T02:39:55.713009"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "\u00daltima mensagem do ciclo [#5]",
+    "timestamp": "2025-11-12T02:39:57.704816"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Como voc\u00eas est\u00e3o? [#5]",
+    "timestamp": "2025-11-12T02:39:57.722823"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Funcionando perfeitamente! [#6]",
+    "timestamp": "2025-11-12T02:39:59.715333"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Algu\u00e9m online? [#6]",
+    "timestamp": "2025-11-12T02:39:59.732819"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Como voc\u00eas est\u00e3o? [#7]",
+    "timestamp": "2025-11-12T02:40:01.725833"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Funcionando perfeitamente! [#7]",
+    "timestamp": "2025-11-12T02:40:01.743788"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Estou testando o sistema [#8]",
+    "timestamp": "2025-11-12T02:40:03.736027"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "\u00daltima mensagem do ciclo [#8]",
+    "timestamp": "2025-11-12T02:40:03.753748"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Alguma novidade? [#9]",
+    "timestamp": "2025-11-12T02:40:05.746523"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Algu\u00e9m online? [#9]",
+    "timestamp": "2025-11-12T02:40:05.763949"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "general",
+    "message": "Ol\u00e1 pessoal! [#10]",
+    "timestamp": "2025-11-12T02:40:07.756790"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Como voc\u00eas est\u00e3o? [#10]",
+    "timestamp": "2025-11-12T02:40:07.776762"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Alguma novidade? [#1]",
+    "timestamp": "2025-11-12T02:40:14.772437"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Como voc\u00eas est\u00e3o? [#1]",
+    "timestamp": "2025-11-12T02:40:14.791791"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Como voc\u00eas est\u00e3o? [#2]",
+    "timestamp": "2025-11-12T02:40:16.783551"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "\u00daltima mensagem do ciclo [#2]",
+    "timestamp": "2025-11-12T02:40:16.802629"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Que dia lindo! [#3]",
+    "timestamp": "2025-11-12T02:40:18.795450"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Que dia lindo! [#3]",
+    "timestamp": "2025-11-12T02:40:18.819540"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Algu\u00e9m online? [#4]",
+    "timestamp": "2025-11-12T02:40:20.806276"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Mais um teste aqui [#4]",
+    "timestamp": "2025-11-12T02:40:20.829580"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Estou testando o sistema [#5]",
+    "timestamp": "2025-11-12T02:40:22.814970"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Algu\u00e9m online? [#5]",
+    "timestamp": "2025-11-12T02:40:22.838181"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Mais um teste aqui [#6]",
+    "timestamp": "2025-11-12T02:40:24.824635"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Ol\u00e1 pessoal! [#6]",
+    "timestamp": "2025-11-12T02:40:24.848639"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Ol\u00e1 pessoal! [#7]",
+    "timestamp": "2025-11-12T02:40:26.837222"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Ol\u00e1 pessoal! [#7]",
+    "timestamp": "2025-11-12T02:40:26.859680"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Mais um teste aqui [#8]",
+    "timestamp": "2025-11-12T02:40:28.848603"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Alguma novidade? [#8]",
+    "timestamp": "2025-11-12T02:40:28.869689"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Mais um teste aqui [#9]",
+    "timestamp": "2025-11-12T02:40:30.859377"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Ol\u00e1 pessoal! [#9]",
+    "timestamp": "2025-11-12T02:40:30.879659"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "news",
+    "message": "Algu\u00e9m online? [#10]",
+    "timestamp": "2025-11-12T02:40:32.870479"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "general",
+    "message": "Estou testando o sistema [#10]",
+    "timestamp": "2025-11-12T02:40:32.890051"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Funcionando perfeitamente! [#1]",
+    "timestamp": "2025-11-12T02:40:39.886436"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Que dia lindo! [#1]",
+    "timestamp": "2025-11-12T02:40:39.905695"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Mais um teste aqui [#2]",
+    "timestamp": "2025-11-12T02:40:41.897905"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Funcionando perfeitamente! [#2]",
+    "timestamp": "2025-11-12T02:40:41.916612"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Ol\u00e1 pessoal! [#3]",
+    "timestamp": "2025-11-12T02:40:43.909282"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Estou testando o sistema [#3]",
+    "timestamp": "2025-11-12T02:40:43.929567"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#4]",
+    "timestamp": "2025-11-12T02:40:45.920612"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Alguma novidade? [#4]",
+    "timestamp": "2025-11-12T02:40:45.943418"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Estou testando o sistema [#5]",
+    "timestamp": "2025-11-12T02:40:47.932018"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Funcionando perfeitamente! [#5]",
+    "timestamp": "2025-11-12T02:40:47.955016"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#6]",
+    "timestamp": "2025-11-12T02:40:49.943555"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "\u00daltima mensagem do ciclo [#6]",
+    "timestamp": "2025-11-12T02:40:49.965455"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#7]",
+    "timestamp": "2025-11-12T02:40:51.954583"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Estou testando o sistema [#7]",
+    "timestamp": "2025-11-12T02:40:51.976596"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Alguma novidade? [#8]",
+    "timestamp": "2025-11-12T02:40:53.964848"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Algu\u00e9m online? [#8]",
+    "timestamp": "2025-11-12T02:40:53.985931"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#9]",
+    "timestamp": "2025-11-12T02:40:55.980861"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Funcionando perfeitamente! [#9]",
+    "timestamp": "2025-11-12T02:40:56.000158"
+  },
+  {
+    "type": "channel",
+    "user": "user_9435",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#10]",
+    "timestamp": "2025-11-12T02:40:57.992172"
+  },
+  {
+    "type": "channel",
+    "user": "user_6893",
+    "channel": "news",
+    "message": "Como voc\u00eas est\u00e3o? [#10]",
+    "timestamp": "2025-11-12T02:40:58.010699"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "sports",
+    "message": "\u00daltima mensagem do ciclo [#1]",
+    "timestamp": "2025-11-12T02:51:48.762718"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "sports",
+    "message": "Algu\u00e9m online? [#2]",
+    "timestamp": "2025-11-12T02:51:50.774117"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "sports",
+    "message": "Estou testando o sistema [#3]",
+    "timestamp": "2025-11-12T02:51:52.783578"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "sports",
+    "message": "Mensagem autom\u00e1tica [#4]",
+    "timestamp": "2025-11-12T02:51:54.794170"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "sports",
+    "message": "Como voc\u00eas est\u00e3o? [#5]",
+    "timestamp": "2025-11-12T02:51:56.805033"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "sports",
+    "message": "Ol\u00e1 pessoal! [#6]",
+    "timestamp": "2025-11-12T02:51:58.816683"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "sports",
+    "message": "Mensagem autom\u00e1tica [#7]",
+    "timestamp": "2025-11-12T02:52:00.826010"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "sports",
+    "message": "Como voc\u00eas est\u00e3o? [#8]",
+    "timestamp": "2025-11-12T02:52:02.837346"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "sports",
+    "message": "Que dia lindo! [#9]",
+    "timestamp": "2025-11-12T02:52:04.848545"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "sports",
+    "message": "Como voc\u00eas est\u00e3o? [#10]",
+    "timestamp": "2025-11-12T02:52:06.860036"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#1]",
+    "timestamp": "2025-11-12T02:52:13.874597"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "random",
+    "message": "Ol\u00e1 pessoal! [#2]",
+    "timestamp": "2025-11-12T02:52:15.886482"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "random",
+    "message": "Alguma novidade? [#3]",
+    "timestamp": "2025-11-12T02:52:17.898021"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "random",
+    "message": "Ol\u00e1 pessoal! [#4]",
+    "timestamp": "2025-11-12T02:52:19.909756"
+  },
+  {
+    "type": "channel",
+    "user": "user_2419",
+    "channel": "random",
+    "message": "Ol\u00e1 pessoal! [#5]",
+    "timestamp": "2025-11-12T02:52:21.921363"
+  },
+  {
+    "type": "channel",
+    "user": "user_7036",
+    "channel": "random",
+    "message": "Estou testando o sistema [#1]",
+    "timestamp": "2025-11-12T02:52:30.051893"
+  },
+  {
+    "type": "channel",
+    "user": "user_7036",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#2]",
+    "timestamp": "2025-11-12T02:52:32.063192"
+  },
+  {
+    "type": "channel",
+    "user": "user_7036",
+    "channel": "random",
+    "message": "Mais um teste aqui [#3]",
+    "timestamp": "2025-11-12T02:52:34.075053"
+  },
+  {
+    "type": "channel",
+    "user": "user_7036",
+    "channel": "random",
+    "message": "Ol\u00e1 pessoal! [#4]",
+    "timestamp": "2025-11-12T02:52:36.086299"
+  },
+  {
+    "type": "channel",
+    "user": "user_7036",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#5]",
+    "timestamp": "2025-11-12T02:52:38.097341"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#1]",
+    "timestamp": "2025-11-12T02:57:39.732727"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "random",
+    "message": "Mais um teste aqui [#2]",
+    "timestamp": "2025-11-12T02:57:41.744747"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#3]",
+    "timestamp": "2025-11-12T02:57:43.756031"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "random",
+    "message": "Mensagem autom\u00e1tica [#4]",
+    "timestamp": "2025-11-12T02:57:45.767194"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "random",
+    "message": "Alguma novidade? [#5]",
+    "timestamp": "2025-11-12T02:57:47.778295"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "random",
+    "message": "Ol\u00e1 pessoal! [#6]",
+    "timestamp": "2025-11-12T02:57:49.789646"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "random",
+    "message": "Como voc\u00eas est\u00e3o? [#7]",
+    "timestamp": "2025-11-12T02:57:51.801385"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "random",
+    "message": "Estou testando o sistema [#8]",
+    "timestamp": "2025-11-12T02:57:53.811202"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "random",
+    "message": "Algu\u00e9m online? [#9]",
+    "timestamp": "2025-11-12T02:57:55.822458"
+  },
+  {
+    "type": "channel",
+    "user": "user_7865",
+    "channel": "general",
+    "message": "Que dia lindo! [#1]",
+    "timestamp": "2025-11-12T02:57:56.076659"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "random",
+    "message": "\u00daltima mensagem do ciclo [#10]",
+    "timestamp": "2025-11-12T02:57:57.833944"
+  },
+  {
+    "type": "channel",
+    "user": "user_7865",
+    "channel": "general",
+    "message": "Algu\u00e9m online? [#2]",
+    "timestamp": "2025-11-12T02:57:58.088137"
+  },
+  {
+    "type": "channel",
+    "user": "user_7865",
+    "channel": "general",
+    "message": "Estou testando o sistema [#3]",
+    "timestamp": "2025-11-12T02:58:00.099583"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "sports",
+    "message": "Mensagem autom\u00e1tica [#1]",
+    "timestamp": "2025-11-12T02:58:04.850264"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "sports",
+    "message": "Como voc\u00eas est\u00e3o? [#2]",
+    "timestamp": "2025-11-12T02:58:06.861943"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "sports",
+    "message": "Como voc\u00eas est\u00e3o? [#3]",
+    "timestamp": "2025-11-12T02:58:08.873341"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "sports",
+    "message": "\u00daltima mensagem do ciclo [#4]",
+    "timestamp": "2025-11-12T02:58:10.884608"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "sports",
+    "message": "Alguma novidade? [#5]",
+    "timestamp": "2025-11-12T02:58:12.895677"
+  },
+  {
+    "type": "channel",
+    "user": "user_6564",
+    "channel": "sports",
+    "message": "\u00daltima mensagem do ciclo [#6]",
+    "timestamp": "2025-11-12T02:58:14.907077"
+  },
+  {
+    "type": "channel",
+    "user": "Bob",
+    "channel": "musica",
+    "message": "Ola Todos",
+    "timestamp": "2025-11-12T03:00:50.863659"
+  },
+  {
+    "type": "channel",
+    "user": "Bob",
+    "channel": "tech",
+    "message": "Olaa Alice!",
+    "timestamp": "2025-11-12T03:05:29.721244"
+  },
+  {
+    "type": "channel",
+    "user": "Alice",
+    "channel": "tech",
+    "message": "Olaa Bob!",
+    "timestamp": "2025-11-12T03:05:48.086865"
+  },
+  {
+    "type": "direct",
+    "from": "Bob",
+    "to": "Alice",
+    "message": "Ola Amiga Alice",
+    "timestamp": "2025-11-12T03:06:08.309214"
+  },
+  {
+    "type": "direct",
+    "from": "Alice",
+    "to": "Bob",
+    "message": "Ola Bob o bobo",
+    "timestamp": "2025-11-12T03:06:21.723690"
+  }
+]

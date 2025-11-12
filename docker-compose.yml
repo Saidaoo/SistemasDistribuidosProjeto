@@ -1,0 +1,22 @@
+# parte1-reqrep/docker-compose.yml
+version: '3.8'
+
+services:
+  servidor:
+    build: 
+      context: ./reqrep
+      dockerfile: Dockerfile_servidor
+    ports:
+      - "5555:5555"
+    volumes:
+      - ./reqrep/data:/app/data
+
+  cliente:
+    build:
+      context: ./reqrep
+      dockerfile: Dockerfile_cliente
+    command: python cliente.py
+    depends_on:
+      - servidor
+    tty: true
+    stdin_open: true
