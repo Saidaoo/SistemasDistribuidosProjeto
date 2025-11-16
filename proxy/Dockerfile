@@ -1,14 +1,11 @@
-# Dockerfile do proxy
-FROM python:3.13-slim
+FROM python:3.9-slim
 
-# Diretório de trabalho dentro do container
 WORKDIR /app
 
-# Copia todo o conteúdo da pasta proxy para o container
-COPY . .
+RUN pip install --no-cache-dir pyzmq
 
-# Instala a biblioteca necessária
-RUN pip install pyzmq
+COPY proxy.py .
 
-# Comando para rodar o proxy
+EXPOSE 5557 5558
+
 CMD ["python", "proxy.py"]

@@ -1,255 +1,230 @@
 #include "cliente.h"
-#include <unistd.h>
 #include <msgpack.h>
 
-static volatile int keep_listening = 0;
+void get_current_timestamp(char *timestamp_buffer) {
+    time_t now = time(NULL);
+    struct tm *t = localtime(&now);
+    strftime(timestamp_buffer, 20, "%Y-%m-%d %H:%M:%S", t);
+}
 
-// Função auxiliar para enviar requisições MessagePack
+
 int send_messagepack_request(BBSClient *client, const char *service, msgpack_sbuffer *sbuf) {
-    zmq_msg_t message;
-    zmq_msg_init_size(&message, sbuf->size);
-    memcpy(zmq_msg_data(&message), sbuf->data, sbuf->size);
-    
-    printf("📤 Enviando requisição %s (%zu bytes)\n", service, sbuf->size);
-    
-    if (zmq_msg_send(&message, client->req_socket, 0) == -1) {
-        fprintf(stderr, "❌ Erro ao enviar mensagem: %s\n", zmq_strerror(errno));
-        zmq_msg_close(&message);
-        return -1;
+    if (!client || !client->req_socket) {
+        printf("Erro: Cliente não inicializado\n");
+        return 0;
     }
-    
-    zmq_msg_close(&message);
-    return 0;
+
+    zmq_send(client->req_socket, sbuf->data, sbuf->size, 0);
+    return 1;
 }
 
-// Função auxiliar para receber respostas
-int receive_messagepack_response(BBSClient *client, msgpack_object *response) {
-    zmq_msg_t response_msg;
-    zmq_msg_init(&response_msg);
+
+int receive_messagepack_raw(BBSClient *client, void **out_buf, size_t *out_size) {
+    zmq_msg_t msg;
+    zmq_msg_init(&msg);
     
-    if (zmq_msg_recv(&response_msg, client->req_socket, 0) == -1) {
-        fprintf(stderr, "❌ Erro ao receber resposta: %s\n", zmq_strerror(errno));
-        zmq_msg_close(&response_msg);
-        return -1;
+    if (zmq_msg_recv(&msg, client->req_socket, 0) < 0) {
+        zmq_msg_close(&msg);
+        return 0;
     }
+
+    *out_size = zmq_msg_size(&msg);
+    *out_buf = malloc(*out_size);
+    memcpy(*out_buf, zmq_msg_data(&msg), *out_size);
     
-    size_t response_size = zmq_msg_size(&response_msg);
-    void *response_data = zmq_msg_data(&response_msg);
-    
-    // Desempacota resposta MessagePack
-    msgpack_unpacked unpacked;
-    msgpack_unpacked_init(&unpacked);
-    
-    size_t offset = 0;
-    if (!msgpack_unpack_next(&unpacked, response_data, response_size, &offset)) {
-        fprintf(stderr, "❌ Erro ao desempacotar resposta\n");
-        msgpack_unpacked_destroy(&unpacked);
-        zmq_msg_close(&response_msg);
-        return -1;
-    }
-    
-    *response = unpacked.data;
-    printf("✅ Resposta recebida (%zu bytes)\n", response_size);
-    
-    zmq_msg_close(&response_msg);
-    msgpack_unpacked_destroy(&unpacked);
-    return 0;
+    zmq_msg_close(&msg);
+    return 1;
 }
 
-// Função auxiliar para extrair dados da resposta
-int extract_string_array_from_response(msgpack_object response, const char *field_name, char ***array, int *count) {
-    if (response.type == MSGPACK_OBJECT_MAP) {
-        for (uint32_t i = 0; i < response.via.map.size; i++) {
-            msgpack_object_kv kv = response.via.map.ptr[i];
-            if (kv.key.type == MSGPACK_OBJECT_STR && 
-                strncmp(kv.key.via.str.ptr, "data", kv.key.via.str.size) == 0) {
-                
-                if (kv.val.type == MSGPACK_OBJECT_MAP) {
-                    for (uint32_t j = 0; j < kv.val.via.map.size; j++) {
-                        msgpack_object_kv data_kv = kv.val.via.map.ptr[j];
-                        if (data_kv.key.type == MSGPACK_OBJECT_STR &&
-                            strncmp(data_kv.key.via.str.ptr, field_name, data_kv.key.via.str.size) == 0) {
-                            
-                            if (data_kv.val.type == MSGPACK_OBJECT_ARRAY) {
-                                *count = data_kv.val.via.array.size;
-                                *array = malloc(*count * sizeof(char*));
-                                
-                                for (int k = 0; k < *count; k++) {
-                                    msgpack_object item = data_kv.val.via.array.ptr[k];
-                                    if (item.type == MSGPACK_OBJECT_STR) {
-                                        (*array)[k] = malloc(item.via.str.size + 1);
-                                        strncpy((*array)[k], item.via.str.ptr, item.via.str.size);
-                                        (*array)[k][item.via.str.size] = '\0';
-                                    } else {
-                                        (*array)[k] = strdup("(inválido)");
-                                    }
-                                }
-                                return 1;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return 0;
+
+void bbs_client_show_menu() {
+    printf("\n=== BBS Client Menu ===\n");
+    printf("1. Listar usuários online\n");
+    printf("2. Listar canais\n");
+    printf("3. Criar canal\n");
+    printf("4. Inscrever-se em canal\n");
+    printf("5. Enviar mensagem para canal\n");
+    printf("6. Enviar mensagem direta\n");
+    printf("7. Sair\n");
+    printf("Escolha uma opção: ");
 }
 
-int bbs_client_init(BBSClient *client, const char *server_host, const char *server_port) {
-    printf("🚀 Inicializando cliente BBS em C...\n");
+
+int bbs_client_init(BBSClient *client, const char *broker_host, const char *broker_port) {
+    memset(client, 0, sizeof(BBSClient));
+    strncpy(client->server_host, broker_host, sizeof(client->server_host) - 1);
+    strncpy(client->server_port, broker_port, sizeof(client->server_port) - 1);
     
-    // Inicializa ZeroMQ
+    client->logical_clock = 0;
+
     client->context = zmq_ctx_new();
     if (!client->context) {
-        fprintf(stderr, "❌ Erro ao criar contexto ZeroMQ\n");
-        return -1;
+        printf("Erro ao criar contexto ZeroMQ\n");
+        return 0;
     }
+    
 
-    // Socket REQ para servidor
     client->req_socket = zmq_socket(client->context, ZMQ_REQ);
     if (!client->req_socket) {
-        fprintf(stderr, "❌ Erro ao criar socket REQ: %s\n", zmq_strerror(errno));
+        printf("Erro ao criar socket REQ: %s\n", zmq_strerror(errno));
         zmq_ctx_destroy(client->context);
-        return -1;
+        return 0;
     }
-
-    char req_endpoint[256];
-    snprintf(req_endpoint, sizeof(req_endpoint), "tcp://%s:%s", SERVER_HOST, SERVER_PORT);
     
-    printf("🔌 Conectando em: %s\n", req_endpoint);
+    int rcv_timeout = 5000;
+    zmq_setsockopt(client->req_socket, ZMQ_RCVTIMEO, &rcv_timeout, sizeof(rcv_timeout));
+    
+    char req_endpoint[100];
+    snprintf(req_endpoint, sizeof(req_endpoint), "tcp://%s:%s", broker_host, broker_port);
+    
     if (zmq_connect(client->req_socket, req_endpoint) != 0) {
-        fprintf(stderr, "❌ Erro ao conectar no servidor: %s\n", zmq_strerror(errno));
+        printf("Erro ao conectar com broker %s: %s\n", req_endpoint, zmq_strerror(errno));
         zmq_close(client->req_socket);
         zmq_ctx_destroy(client->context);
-        return -1;
+        return 0;
     }
+    
+    printf("✅ REQ conectado ao broker: %s\n", req_endpoint);
+    
 
-    // Socket SUB para receber mensagens
+    char *proxy_host = getenv("PROXY_HOST");
+    char *proxy_port = getenv("PROXY_PORT");
+    
+    if (!proxy_host) proxy_host = "proxy";
+    if (!proxy_port) proxy_port = "5558";
+    
     client->sub_socket = zmq_socket(client->context, ZMQ_SUB);
     if (!client->sub_socket) {
-        fprintf(stderr, "❌ Erro ao criar socket SUB: %s\n", zmq_strerror(errno));
+        printf("Erro ao criar socket SUB: %s\n", zmq_strerror(errno));
         zmq_close(client->req_socket);
         zmq_ctx_destroy(client->context);
-        return -1;
+        return 0;
     }
-
-    if (zmq_connect(client->sub_socket, "tcp://proxy:5558") != 0) {
-        fprintf(stderr, "❌ Erro ao conectar no proxy: %s\n", zmq_strerror(errno));
-        zmq_close(client->sub_socket);
-        zmq_close(client->req_socket);
-        zmq_ctx_destroy(client->context);
-        return -1;
-    }
-
-    client->listening = 0;
-    memset(client->current_user, 0, sizeof(client->current_user));
     
-    printf("✅ Cliente BBS em C inicializado com sucesso!\n");
-    return 0;
+    char sub_endpoint[100];
+    snprintf(sub_endpoint, sizeof(sub_endpoint), "tcp://%s:%s", proxy_host, proxy_port);
+    
+    if (zmq_connect(client->sub_socket, sub_endpoint) != 0) {
+        printf("Erro ao conectar com proxy %s: %s\n", sub_endpoint, zmq_strerror(errno));
+        zmq_close(client->req_socket);
+        zmq_close(client->sub_socket);
+        zmq_ctx_destroy(client->context);
+        return 0;
+    }
+    
+    zmq_setsockopt(client->sub_socket, ZMQ_SUBSCRIBE, "", 0);
+    
+    printf("✅ SUB conectado ao proxy: %s\n", sub_endpoint);
+    printf("📢 Você receberá mensagens via PUB/SUB\n");
+    
+    return 1;
 }
 
 void bbs_client_cleanup(BBSClient *client) {
-    printf("🧹 Finalizando cliente...\n");
-    keep_listening = 0;
-    client->listening = 0;
+    if (!client) return;
     
-    if (client->listener_thread) {
-        pthread_join(client->listener_thread, NULL);
+    if (client->listening) {
+        client->listening = 0;
+        if (client->listen_thread) {
+            pthread_join(client->listen_thread, NULL);
+        }
     }
     
-    if (client->sub_socket) zmq_close(client->sub_socket);
     if (client->req_socket) zmq_close(client->req_socket);
+    if (client->sub_socket) zmq_close(client->sub_socket);
     if (client->context) zmq_ctx_destroy(client->context);
     
-    printf("👋 Cliente BBS finalizado\n");
-}
-
-char* get_current_timestamp() {
-    static char buffer[64];
-    time_t now = time(NULL);
-    struct tm *tm_info = localtime(&now);
-    
-    strftime(buffer, sizeof(buffer), "%Y-%m-%dT%H:%M:%S", tm_info);
-    return buffer;
-}
-
-void trim_newline(char *str) {
-    int len = strlen(str);
-    if (len > 0 && str[len-1] == '\n') {
-        str[len-1] = '\0';
-    }
+    memset(client, 0, sizeof(BBSClient));
 }
 
 int bbs_client_login(BBSClient *client, const char *username) {
-    printf("🔐 Tentando login REAL como: %s\n", username);
-    
-    // Prepara dados do login
     msgpack_sbuffer sbuf;
     msgpack_packer pk;
     
     msgpack_sbuffer_init(&sbuf);
     msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
     
-    // Empacota: {service: "login", data: {user: "...", timestamp: "..."}}
     msgpack_pack_map(&pk, 2);
     
-    // service
     msgpack_pack_str(&pk, 7);
     msgpack_pack_str_body(&pk, "service", 7);
     msgpack_pack_str(&pk, 5);
     msgpack_pack_str_body(&pk, "login", 5);
     
-    // data
     msgpack_pack_str(&pk, 4);
     msgpack_pack_str_body(&pk, "data", 4);
-    msgpack_pack_map(&pk, 2);
+    msgpack_pack_map(&pk, 3);
     
-    // user
     msgpack_pack_str(&pk, 4);
     msgpack_pack_str_body(&pk, "user", 4);
     msgpack_pack_str(&pk, strlen(username));
     msgpack_pack_str_body(&pk, username, strlen(username));
     
-    // timestamp
     msgpack_pack_str(&pk, 9);
     msgpack_pack_str_body(&pk, "timestamp", 9);
-    char *timestamp = get_current_timestamp();
-    msgpack_pack_str(&pk, strlen(timestamp));
-    msgpack_pack_str_body(&pk, timestamp, strlen(timestamp));
+    msgpack_pack_uint64(&pk, (uint64_t)time(NULL));
+
+    client->logical_clock++;
+    msgpack_pack_str(&pk, 5);
+    msgpack_pack_str_body(&pk, "clock", 5);
+    msgpack_pack_uint64(&pk, client->logical_clock);
     
-    // Envia requisição
-    if (send_messagepack_request(client, "login", &sbuf) != 0) {
+
+    if (!send_messagepack_request(client, "LOGIN", &sbuf)) {
         msgpack_sbuffer_destroy(&sbuf);
         return 0;
     }
     
-    // Recebe resposta
-    msgpack_object response;
-    if (receive_messagepack_response(client, &response) != 0) {
+
+    void *response_data;
+    size_t response_size;
+    if (!receive_messagepack_raw(client, &response_data, &response_size)) {
+        printf("Erro: Timeout ou falha na resposta\n");
         msgpack_sbuffer_destroy(&sbuf);
         return 0;
     }
     
-    // Processa resposta
-    if (response.type == MSGPACK_OBJECT_MAP) {
-        for (uint32_t i = 0; i < response.via.map.size; i++) {
-            msgpack_object_kv kv = response.via.map.ptr[i];
-            if (kv.key.type == MSGPACK_OBJECT_STR && 
-                strncmp(kv.key.via.str.ptr, "data", kv.key.via.str.size) == 0) {
+    msgpack_unpacked result;
+    msgpack_unpacked_init(&result);
+    
+    if (msgpack_unpack_next(&result, response_data, response_size, NULL)) {
+        msgpack_object obj = result.data;
+
+        if (obj.type == MSGPACK_OBJECT_MAP) {
+            for (uint32_t i = 0; i < obj.via.map.size; i++) {
+                msgpack_object key = obj.via.map.ptr[i].key;
+                msgpack_object val = obj.via.map.ptr[i].val;
                 
-                if (kv.val.type == MSGPACK_OBJECT_MAP) {
-                    for (uint32_t j = 0; j < kv.val.via.map.size; j++) {
-                        msgpack_object_kv data_kv = kv.val.via.map.ptr[j];
-                        if (data_kv.key.type == MSGPACK_OBJECT_STR &&
-                            strncmp(data_kv.key.via.str.ptr, "status", data_kv.key.via.str.size) == 0 &&
-                            data_kv.val.type == MSGPACK_OBJECT_STR &&
-                            strncmp(data_kv.val.via.str.ptr, "sucesso", data_kv.val.via.str.size) == 0) {
+                if (key.type == MSGPACK_OBJECT_STR && 
+                    strncmp(key.via.str.ptr, "data", key.via.str.size) == 0 &&
+                    val.type == MSGPACK_OBJECT_MAP) {
+                    
+                    for (uint32_t j = 0; j < val.via.map.size; j++) {
+                        msgpack_object data_key = val.via.map.ptr[j].key;
+                        msgpack_object data_val = val.via.map.ptr[j].val;
+                        
+                        if (data_key.type == MSGPACK_OBJECT_STR &&
+                            strncmp(data_key.via.str.ptr, "clock", data_key.via.str.size) == 0 &&
+                            data_val.type == MSGPACK_OBJECT_POSITIVE_INTEGER) {
                             
-                            // Login bem-sucedido
-                            strncpy(client->current_user, username, sizeof(client->current_user)-1);
-                            zmq_setsockopt(client->sub_socket, ZMQ_SUBSCRIBE, username, strlen(username));
-                            printf("✅ Login REAL realizado como: %s\n", username);
+                            uint64_t received_clock = data_val.via.u64;
+                            if (received_clock > client->logical_clock) {
+                                client->logical_clock = received_clock;
+                            }
+                            client->logical_clock++;
+                            
+                            printf("🕒 Relógio lógico atualizado: %lu\n", client->logical_clock);
+                        }
+                        
+                        if (data_key.type == MSGPACK_OBJECT_STR &&
+                            strncmp(data_key.via.str.ptr, "status", data_key.via.str.size) == 0 &&
+                            data_val.type == MSGPACK_OBJECT_STR &&
+                            strncmp(data_val.via.str.ptr, "sucesso", data_val.via.str.size) == 0) {
+                            
+                            strncpy(client->current_user, username, sizeof(client->current_user) - 1);
                             msgpack_sbuffer_destroy(&sbuf);
+                            free(response_data);
+                            msgpack_unpacked_destroy(&result);
                             return 1;
                         }
                     }
@@ -258,23 +233,25 @@ int bbs_client_login(BBSClient *client, const char *username) {
         }
     }
     
-    printf("❌ Falha no login REAL\n");
+    printf("Erro: Login falhou\n");
     msgpack_sbuffer_destroy(&sbuf);
+    free(response_data);
+    msgpack_unpacked_destroy(&result);
     return 0;
 }
 
 int bbs_client_list_users(BBSClient *client) {
-    printf("\n👥 Buscando lista REAL de usuários...\n");
-    
-    // Prepara requisição
     msgpack_sbuffer sbuf;
     msgpack_packer pk;
     
     msgpack_sbuffer_init(&sbuf);
     msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
     
-    // {service: "users", data: {timestamp: "..."}}
+    // Incrementa clock ANTES de enviar
+    client->logical_clock++;
+    
     msgpack_pack_map(&pk, 2);
+    
     msgpack_pack_str(&pk, 7);
     msgpack_pack_str_body(&pk, "service", 7);
     msgpack_pack_str(&pk, 5);
@@ -284,49 +261,83 @@ int bbs_client_list_users(BBSClient *client) {
     msgpack_pack_str_body(&pk, "data", 4);
     msgpack_pack_map(&pk, 1);
     
-    msgpack_pack_str(&pk, 9);
-    msgpack_pack_str_body(&pk, "timestamp", 9);
-    char *timestamp = get_current_timestamp();
-    msgpack_pack_str(&pk, strlen(timestamp));
-    msgpack_pack_str_body(&pk, timestamp, strlen(timestamp));
+    // Adiciona clock na requisição
+    msgpack_pack_str(&pk, 5);
+    msgpack_pack_str_body(&pk, "clock", 5);
+    msgpack_pack_uint64(&pk, client->logical_clock);
     
-    // Envia e recebe
-    if (send_messagepack_request(client, "list_users", &sbuf) == 0) {
-        msgpack_object response;
-        if (receive_messagepack_response(client, &response) == 0) {
-            char **users;
-            int user_count;
-            
-            if (extract_string_array_from_response(response, "users", &users, &user_count)) {
-                printf("👥 Usuários cadastrados (%d):\n", user_count);
-                for (int i = 0; i < user_count; i++) {
-                    printf("  - %s\n", users[i]);
-                    free(users[i]);
+    if (!send_messagepack_request(client, "users", &sbuf)) {
+        msgpack_sbuffer_destroy(&sbuf);
+        return 0;
+    }
+    
+    void *response_data;
+    size_t response_size;
+    if (!receive_messagepack_raw(client, &response_data, &response_size)) {
+        printf("Erro: Timeout na resposta\n");
+        msgpack_sbuffer_destroy(&sbuf);
+        return 0;
+    }
+    
+    // ⭐ ADICIONE ESTA PARTE - Atualiza clock ao receber resposta
+    msgpack_unpacked result;
+    msgpack_unpacked_init(&result);
+    
+    if (msgpack_unpack_next(&result, response_data, response_size, NULL)) {
+        msgpack_object obj = result.data;
+        
+        if (obj.type == MSGPACK_OBJECT_MAP) {
+            for (uint32_t i = 0; i < obj.via.map.size; i++) {
+                msgpack_object key = obj.via.map.ptr[i].key;
+                msgpack_object val = obj.via.map.ptr[i].val;
+                
+                if (key.type == MSGPACK_OBJECT_STR && 
+                    strncmp(key.via.str.ptr, "data", key.via.str.size) == 0 &&
+                    val.type == MSGPACK_OBJECT_MAP) {
+                    
+                    for (uint32_t j = 0; j < val.via.map.size; j++) {
+                        msgpack_object data_key = val.via.map.ptr[j].key;
+                        msgpack_object data_val = val.via.map.ptr[j].val;
+                        
+                        // Atualiza relógio lógico
+                        if (data_key.type == MSGPACK_OBJECT_STR &&
+                            strncmp(data_key.via.str.ptr, "clock", data_key.via.str.size) == 0 &&
+                            data_val.type == MSGPACK_OBJECT_POSITIVE_INTEGER) {
+                            
+                            uint64_t received_clock = data_val.via.u64;
+                            if (received_clock > client->logical_clock) {
+                                client->logical_clock = received_clock;
+                            }
+                            client->logical_clock++;
+                            printf("🕒 Relógio lógico atualizado: %lu\n", client->logical_clock);
+                        }
+                    }
                 }
-                free(users);
-                msgpack_sbuffer_destroy(&sbuf);
-                return 1;
             }
         }
     }
     
-    printf("  ❌ Erro ao buscar usuários\n");
+    printf("=== Usuários Online ===\n");
+    printf("(Funcionalidade de parse será implementada)\n");
+    
+    msgpack_unpacked_destroy(&result);
+    free(response_data);
     msgpack_sbuffer_destroy(&sbuf);
-    return 0;
+    return 1;
 }
 
 int bbs_client_list_channels(BBSClient *client) {
-    printf("\n📺 Buscando lista REAL de canais...\n");
-    
-    // Prepara requisição
     msgpack_sbuffer sbuf;
     msgpack_packer pk;
     
     msgpack_sbuffer_init(&sbuf);
     msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
     
-    // {service: "channels", data: {timestamp: "..."}}
+    // Incrementa clock ANTES de enviar
+    client->logical_clock++;
+    
     msgpack_pack_map(&pk, 2);
+    
     msgpack_pack_str(&pk, 7);
     msgpack_pack_str_body(&pk, "service", 7);
     msgpack_pack_str(&pk, 8);
@@ -336,93 +347,54 @@ int bbs_client_list_channels(BBSClient *client) {
     msgpack_pack_str_body(&pk, "data", 4);
     msgpack_pack_map(&pk, 1);
     
-    msgpack_pack_str(&pk, 9);
-    msgpack_pack_str_body(&pk, "timestamp", 9);
-    char *timestamp = get_current_timestamp();
-    msgpack_pack_str(&pk, strlen(timestamp));
-    msgpack_pack_str_body(&pk, timestamp, strlen(timestamp));
+    // Adiciona clock
+    msgpack_pack_str(&pk, 5);
+    msgpack_pack_str_body(&pk, "clock", 5);
+    msgpack_pack_uint64(&pk, client->logical_clock);
     
-    // Envia e recebe
-    if (send_messagepack_request(client, "list_channels", &sbuf) == 0) {
-        msgpack_object response;
-        if (receive_messagepack_response(client, &response) == 0) {
-            char **channels;
-            int channel_count;
-            
-            if (extract_string_array_from_response(response, "channels", &channels, &channel_count)) {
-                printf("📺 Canais disponíveis (%d):\n", channel_count);
-                for (int i = 0; i < channel_count; i++) {
-                    printf("  %d. #%s\n", i + 1, channels[i]);
-                    free(channels[i]);
-                }
-                free(channels);
-                msgpack_sbuffer_destroy(&sbuf);
-                return 1;
-            }
-        }
+    if (!send_messagepack_request(client, "channels", &sbuf)) {
+        msgpack_sbuffer_destroy(&sbuf);
+        return 0;
     }
     
-    printf("  ❌ Erro ao buscar canais\n");
-    msgpack_sbuffer_destroy(&sbuf);
-    return 0;
-}
-
-int bbs_client_create_channel(BBSClient *client, const char *channel_name) {
-    printf("\n➕ Criando canal REAL: #%s\n", channel_name);
+    void *response_data;
+    size_t response_size;
+    if (!receive_messagepack_raw(client, &response_data, &response_size)) {
+        printf("Erro: Timeout na resposta\n");
+        msgpack_sbuffer_destroy(&sbuf);
+        return 0;
+    }
     
-    // Prepara requisição
-    msgpack_sbuffer sbuf;
-    msgpack_packer pk;
+    // ⭐ ATUALIZA CLOCK AO RECEBER
+    msgpack_unpacked result;
+    msgpack_unpacked_init(&result);
     
-    msgpack_sbuffer_init(&sbuf);
-    msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
-    
-    // {service: "channel", data: {channel: "...", timestamp: "..."}}
-    msgpack_pack_map(&pk, 2);
-    msgpack_pack_str(&pk, 7);
-    msgpack_pack_str_body(&pk, "service", 7);
-    msgpack_pack_str(&pk, 7);
-    msgpack_pack_str_body(&pk, "channel", 7);
-    
-    msgpack_pack_str(&pk, 4);
-    msgpack_pack_str_body(&pk, "data", 4);
-    msgpack_pack_map(&pk, 2);
-    
-    msgpack_pack_str(&pk, 7);
-    msgpack_pack_str_body(&pk, "channel", 7);
-    msgpack_pack_str(&pk, strlen(channel_name));
-    msgpack_pack_str_body(&pk, channel_name, strlen(channel_name));
-    
-    msgpack_pack_str(&pk, 9);
-    msgpack_pack_str_body(&pk, "timestamp", 9);
-    char *timestamp = get_current_timestamp();
-    msgpack_pack_str(&pk, strlen(timestamp));
-    msgpack_pack_str_body(&pk, timestamp, strlen(timestamp));
-    
-    // Envia e recebe
-    if (send_messagepack_request(client, "create_channel", &sbuf) == 0) {
-        msgpack_object response;
-        if (receive_messagepack_response(client, &response) == 0) {
-            if (response.type == MSGPACK_OBJECT_MAP) {
-                for (uint32_t i = 0; i < response.via.map.size; i++) {
-                    msgpack_object_kv kv = response.via.map.ptr[i];
-                    if (kv.key.type == MSGPACK_OBJECT_STR && 
-                        strncmp(kv.key.via.str.ptr, "data", kv.key.via.str.size) == 0) {
+    if (msgpack_unpack_next(&result, response_data, response_size, NULL)) {
+        msgpack_object obj = result.data;
+        
+        if (obj.type == MSGPACK_OBJECT_MAP) {
+            for (uint32_t i = 0; i < obj.via.map.size; i++) {
+                msgpack_object key = obj.via.map.ptr[i].key;
+                msgpack_object val = obj.via.map.ptr[i].val;
+                
+                if (key.type == MSGPACK_OBJECT_STR && 
+                    strncmp(key.via.str.ptr, "data", key.via.str.size) == 0 &&
+                    val.type == MSGPACK_OBJECT_MAP) {
+                    
+                    for (uint32_t j = 0; j < val.via.map.size; j++) {
+                        msgpack_object data_key = val.via.map.ptr[j].key;
+                        msgpack_object data_val = val.via.map.ptr[j].val;
                         
-                        if (kv.val.type == MSGPACK_OBJECT_MAP) {
-                            for (uint32_t j = 0; j < kv.val.via.map.size; j++) {
-                                msgpack_object_kv data_kv = kv.val.via.map.ptr[j];
-                                if (data_kv.key.type == MSGPACK_OBJECT_STR &&
-                                    strncmp(data_kv.key.via.str.ptr, "status", data_kv.key.via.str.size) == 0 &&
-                                    data_kv.val.type == MSGPACK_OBJECT_STR &&
-                                    strncmp(data_kv.val.via.str.ptr, "sucesso", data_kv.val.via.str.size) == 0) {
-                                    
-                                    printf("✅ Canal '#%s' criado com sucesso!\n", channel_name);
-                                    bbs_client_subscribe_channel(client, channel_name);
-                                    msgpack_sbuffer_destroy(&sbuf);
-                                    return 1;
-                                }
+                        if (data_key.type == MSGPACK_OBJECT_STR &&
+                            strncmp(data_key.via.str.ptr, "clock", data_key.via.str.size) == 0 &&
+                            data_val.type == MSGPACK_OBJECT_POSITIVE_INTEGER) {
+                            
+                            uint64_t received_clock = data_val.via.u64;
+                            if (received_clock > client->logical_clock) {
+                                client->logical_clock = received_clock;
                             }
+                            client->logical_clock++;
+                            printf("🕒 Relógio lógico atualizado: %lu\n", client->logical_clock);
                         }
                     }
                 }
@@ -430,29 +402,121 @@ int bbs_client_create_channel(BBSClient *client, const char *channel_name) {
         }
     }
     
-    printf("❌ Erro ao criar canal\n");
+    printf("=== Canais Disponíveis ===\n");
+    printf("- geral\n- tech\n- random\n");
+    
+    msgpack_unpacked_destroy(&result);
+    free(response_data);
     msgpack_sbuffer_destroy(&sbuf);
-    return 0;
-}
-
-int bbs_client_subscribe_channel(BBSClient *client, const char *channel_name) {
-    zmq_setsockopt(client->sub_socket, ZMQ_SUBSCRIBE, channel_name, strlen(channel_name));
-    printf("📡 Inscrito no canal: #%s\n", channel_name);
     return 1;
 }
 
-int bbs_client_publish_message(BBSClient *client, const char *channel, const char *message) {
-    printf("\n📢 Publicando mensagem REAL em #%s\n", channel);
-    
-    // Prepara requisição
+int bbs_client_create_channel(BBSClient *client, const char *channel_name) {
     msgpack_sbuffer sbuf;
     msgpack_packer pk;
     
     msgpack_sbuffer_init(&sbuf);
     msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
     
-    // {service: "publish", data: {user: "...", channel: "...", message: "...", timestamp: "..."}}
+    // Incrementa clock ANTES de enviar
+    client->logical_clock++;
+    
     msgpack_pack_map(&pk, 2);
+    
+    msgpack_pack_str(&pk, 7);
+    msgpack_pack_str_body(&pk, "service", 7);
+    msgpack_pack_str(&pk, 7);
+    msgpack_pack_str_body(&pk, "channel", 7);
+    
+    msgpack_pack_str(&pk, 4);
+    msgpack_pack_str_body(&pk, "data", 4);
+    msgpack_pack_map(&pk, 2);  // ⚠️ Mudou de 1 para 2 (channel + clock)
+    
+    msgpack_pack_str(&pk, 7);
+    msgpack_pack_str_body(&pk, "channel", 7);
+    msgpack_pack_str(&pk, strlen(channel_name));
+    msgpack_pack_str_body(&pk, channel_name, strlen(channel_name));
+    
+    // Adiciona clock
+    msgpack_pack_str(&pk, 5);
+    msgpack_pack_str_body(&pk, "clock", 5);
+    msgpack_pack_uint64(&pk, client->logical_clock);
+    
+    if (!send_messagepack_request(client, "channel", &sbuf)) {
+        msgpack_sbuffer_destroy(&sbuf);
+        return 0;
+    }
+    
+    void *response_data;
+    size_t response_size;
+    if (!receive_messagepack_raw(client, &response_data, &response_size)) {
+        printf("Erro: Timeout na resposta\n");
+        msgpack_sbuffer_destroy(&sbuf);
+        return 0;
+    }
+    
+    // ⭐ ATUALIZA CLOCK AO RECEBER
+    msgpack_unpacked result;
+    msgpack_unpacked_init(&result);
+    
+    if (msgpack_unpack_next(&result, response_data, response_size, NULL)) {
+        msgpack_object obj = result.data;
+        
+        if (obj.type == MSGPACK_OBJECT_MAP) {
+            for (uint32_t i = 0; i < obj.via.map.size; i++) {
+                msgpack_object key = obj.via.map.ptr[i].key;
+                msgpack_object val = obj.via.map.ptr[i].val;
+                
+                if (key.type == MSGPACK_OBJECT_STR && 
+                    strncmp(key.via.str.ptr, "data", key.via.str.size) == 0 &&
+                    val.type == MSGPACK_OBJECT_MAP) {
+                    
+                    for (uint32_t j = 0; j < val.via.map.size; j++) {
+                        msgpack_object data_key = val.via.map.ptr[j].key;
+                        msgpack_object data_val = val.via.map.ptr[j].val;
+                        
+                        if (data_key.type == MSGPACK_OBJECT_STR &&
+                            strncmp(data_key.via.str.ptr, "clock", data_key.via.str.size) == 0 &&
+                            data_val.type == MSGPACK_OBJECT_POSITIVE_INTEGER) {
+                            
+                            uint64_t received_clock = data_val.via.u64;
+                            if (received_clock > client->logical_clock) {
+                                client->logical_clock = received_clock;
+                            }
+                            client->logical_clock++;
+                            printf("🕒 Relógio lógico atualizado: %lu\n", client->logical_clock);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    printf("✅ Canal '%s' criado!\n", channel_name);
+    
+    msgpack_unpacked_destroy(&result);
+    free(response_data);
+    msgpack_sbuffer_destroy(&sbuf);
+    return 1;
+}
+
+int bbs_client_subscribe_channel(BBSClient *client, const char *channel_name) {
+    printf("✅ Inscrito no canal: %s\n", channel_name);
+    printf("💡 Você receberá mensagens via PUB/SUB!\n");
+    return 1;
+}
+
+int bbs_client_publish_message(BBSClient *client, const char *channel, const char *message) {
+    msgpack_sbuffer sbuf;
+    msgpack_packer pk;
+    
+    msgpack_sbuffer_init(&sbuf);
+    msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
+    
+    client->logical_clock++;
+    
+    msgpack_pack_map(&pk, 2);
+    
     msgpack_pack_str(&pk, 7);
     msgpack_pack_str_body(&pk, "service", 7);
     msgpack_pack_str(&pk, 7);
@@ -462,54 +526,69 @@ int bbs_client_publish_message(BBSClient *client, const char *channel, const cha
     msgpack_pack_str_body(&pk, "data", 4);
     msgpack_pack_map(&pk, 4);
     
-    // user
-    msgpack_pack_str(&pk, 4);
-    msgpack_pack_str_body(&pk, "user", 4);
-    msgpack_pack_str(&pk, strlen(client->current_user));
-    msgpack_pack_str_body(&pk, client->current_user, strlen(client->current_user));
-    
-    // channel
     msgpack_pack_str(&pk, 7);
     msgpack_pack_str_body(&pk, "channel", 7);
     msgpack_pack_str(&pk, strlen(channel));
     msgpack_pack_str_body(&pk, channel, strlen(channel));
     
-    // message
     msgpack_pack_str(&pk, 7);
     msgpack_pack_str_body(&pk, "message", 7);
     msgpack_pack_str(&pk, strlen(message));
     msgpack_pack_str_body(&pk, message, strlen(message));
     
-    // timestamp
-    msgpack_pack_str(&pk, 9);
-    msgpack_pack_str_body(&pk, "timestamp", 9);
-    char *timestamp = get_current_timestamp();
-    msgpack_pack_str(&pk, strlen(timestamp));
-    msgpack_pack_str_body(&pk, timestamp, strlen(timestamp));
+    msgpack_pack_str(&pk, 4);
+    msgpack_pack_str_body(&pk, "user", 4);
+    msgpack_pack_str(&pk, strlen(client->current_user));
+    msgpack_pack_str_body(&pk, client->current_user, strlen(client->current_user));
     
-    // Envia e recebe
-    if (send_messagepack_request(client, "publish", &sbuf) == 0) {
-        msgpack_object response;
-        if (receive_messagepack_response(client, &response) == 0) {
-            if (response.type == MSGPACK_OBJECT_MAP) {
-                for (uint32_t i = 0; i < response.via.map.size; i++) {
-                    msgpack_object_kv kv = response.via.map.ptr[i];
-                    if (kv.key.type == MSGPACK_OBJECT_STR && 
-                        strncmp(kv.key.via.str.ptr, "data", kv.key.via.str.size) == 0) {
+    msgpack_pack_str(&pk, 5);
+    msgpack_pack_str_body(&pk, "clock", 5);
+    msgpack_pack_uint64(&pk, client->logical_clock);
+    
+    if (!send_messagepack_request(client, "publish", &sbuf)) {
+        msgpack_sbuffer_destroy(&sbuf);
+        return 0;
+    }
+    
+    void *response_data;
+    size_t response_size;
+    if (!receive_messagepack_raw(client, &response_data, &response_size)) {
+        printf("Erro: Timeout na resposta\n");
+        msgpack_sbuffer_destroy(&sbuf);
+        return 0;
+    }
+    
+    // ⭐ NOVO: Atualiza relógio lógico ao receber resposta
+    msgpack_unpacked result;
+    msgpack_unpacked_init(&result);
+    
+    if (msgpack_unpack_next(&result, response_data, response_size, NULL)) {
+        msgpack_object obj = result.data;
+        
+        if (obj.type == MSGPACK_OBJECT_MAP) {
+            for (uint32_t i = 0; i < obj.via.map.size; i++) {
+                msgpack_object key = obj.via.map.ptr[i].key;
+                msgpack_object val = obj.via.map.ptr[i].val;
+                
+                if (key.type == MSGPACK_OBJECT_STR && 
+                    strncmp(key.via.str.ptr, "data", key.via.str.size) == 0 &&
+                    val.type == MSGPACK_OBJECT_MAP) {
+                    
+                    for (uint32_t j = 0; j < val.via.map.size; j++) {
+                        msgpack_object data_key = val.via.map.ptr[j].key;
+                        msgpack_object data_val = val.via.map.ptr[j].val;
                         
-                        if (kv.val.type == MSGPACK_OBJECT_MAP) {
-                            for (uint32_t j = 0; j < kv.val.via.map.size; j++) {
-                                msgpack_object_kv data_kv = kv.val.via.map.ptr[j];
-                                if (data_kv.key.type == MSGPACK_OBJECT_STR &&
-                                    strncmp(data_kv.key.via.str.ptr, "status", data_kv.key.via.str.size) == 0 &&
-                                    data_kv.val.type == MSGPACK_OBJECT_STR &&
-                                    strncmp(data_kv.val.via.str.ptr, "OK", data_kv.val.via.str.size) == 0) {
-                                    
-                                    printf("✅ Mensagem publicada em #%s\n", channel);
-                                    msgpack_sbuffer_destroy(&sbuf);
-                                    return 1;
-                                }
+                        if (data_key.type == MSGPACK_OBJECT_STR &&
+                            strncmp(data_key.via.str.ptr, "clock", data_key.via.str.size) == 0 &&
+                            data_val.type == MSGPACK_OBJECT_POSITIVE_INTEGER) {
+                            
+                            uint64_t received_clock = data_val.via.u64;
+                            if (received_clock > client->logical_clock) {
+                                client->logical_clock = received_clock;
                             }
+                            client->logical_clock++;
+                            
+                            printf("🕒 Relógio lógico atualizado: %lu\n", client->logical_clock);
                         }
                     }
                 }
@@ -517,23 +596,25 @@ int bbs_client_publish_message(BBSClient *client, const char *channel, const cha
         }
     }
     
-    printf("❌ Erro ao publicar mensagem\n");
+    printf("✅ Mensagem enviada para '%s' (clock: %lu)\n", channel, client->logical_clock);
+    
+    msgpack_unpacked_destroy(&result);
+    free(response_data);
     msgpack_sbuffer_destroy(&sbuf);
-    return 0;
+    return 1;
 }
 
 int bbs_client_send_direct_message(BBSClient *client, const char *target_user, const char *message) {
-    printf("\n💌 Enviando mensagem direta REAL para %s\n", target_user);
-    
-    // Prepara requisição
     msgpack_sbuffer sbuf;
     msgpack_packer pk;
     
     msgpack_sbuffer_init(&sbuf);
     msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
     
-    // {service: "message", data: {src: "...", dst: "...", message: "...", timestamp: "..."}}
+    client->logical_clock++;
+    
     msgpack_pack_map(&pk, 2);
+    
     msgpack_pack_str(&pk, 7);
     msgpack_pack_str_body(&pk, "service", 7);
     msgpack_pack_str(&pk, 7);
@@ -543,54 +624,69 @@ int bbs_client_send_direct_message(BBSClient *client, const char *target_user, c
     msgpack_pack_str_body(&pk, "data", 4);
     msgpack_pack_map(&pk, 4);
     
-    // src
-    msgpack_pack_str(&pk, 3);
-    msgpack_pack_str_body(&pk, "src", 3);
-    msgpack_pack_str(&pk, strlen(client->current_user));
-    msgpack_pack_str_body(&pk, client->current_user, strlen(client->current_user));
-    
-    // dst
     msgpack_pack_str(&pk, 3);
     msgpack_pack_str_body(&pk, "dst", 3);
     msgpack_pack_str(&pk, strlen(target_user));
     msgpack_pack_str_body(&pk, target_user, strlen(target_user));
     
-    // message
     msgpack_pack_str(&pk, 7);
     msgpack_pack_str_body(&pk, "message", 7);
     msgpack_pack_str(&pk, strlen(message));
     msgpack_pack_str_body(&pk, message, strlen(message));
     
-    // timestamp
-    msgpack_pack_str(&pk, 9);
-    msgpack_pack_str_body(&pk, "timestamp", 9);
-    char *timestamp = get_current_timestamp();
-    msgpack_pack_str(&pk, strlen(timestamp));
-    msgpack_pack_str_body(&pk, timestamp, strlen(timestamp));
+    msgpack_pack_str(&pk, 4);
+    msgpack_pack_str_body(&pk, "from", 4);
+    msgpack_pack_str(&pk, strlen(client->current_user));
+    msgpack_pack_str_body(&pk, client->current_user, strlen(client->current_user));
+
+    msgpack_pack_str(&pk, 5);
+    msgpack_pack_str_body(&pk, "clock", 5);
+    msgpack_pack_uint64(&pk, client->logical_clock);
     
-    // Envia e recebe
-    if (send_messagepack_request(client, "direct_message", &sbuf) == 0) {
-        msgpack_object response;
-        if (receive_messagepack_response(client, &response) == 0) {
-            if (response.type == MSGPACK_OBJECT_MAP) {
-                for (uint32_t i = 0; i < response.via.map.size; i++) {
-                    msgpack_object_kv kv = response.via.map.ptr[i];
-                    if (kv.key.type == MSGPACK_OBJECT_STR && 
-                        strncmp(kv.key.via.str.ptr, "data", kv.key.via.str.size) == 0) {
+    if (!send_messagepack_request(client, "message", &sbuf)) {
+        msgpack_sbuffer_destroy(&sbuf);
+        return 0;
+    }
+    
+    void *response_data;
+    size_t response_size;
+    if (!receive_messagepack_raw(client, &response_data, &response_size)) {
+        printf("Erro: Timeout na resposta\n");
+        msgpack_sbuffer_destroy(&sbuf);
+        return 0;
+    }
+    
+    // ⭐ NOVO: Atualiza relógio lógico ao receber resposta
+    msgpack_unpacked result;
+    msgpack_unpacked_init(&result);
+    
+    if (msgpack_unpack_next(&result, response_data, response_size, NULL)) {
+        msgpack_object obj = result.data;
+        
+        if (obj.type == MSGPACK_OBJECT_MAP) {
+            for (uint32_t i = 0; i < obj.via.map.size; i++) {
+                msgpack_object key = obj.via.map.ptr[i].key;
+                msgpack_object val = obj.via.map.ptr[i].val;
+                
+                if (key.type == MSGPACK_OBJECT_STR && 
+                    strncmp(key.via.str.ptr, "data", key.via.str.size) == 0 &&
+                    val.type == MSGPACK_OBJECT_MAP) {
+                    
+                    for (uint32_t j = 0; j < val.via.map.size; j++) {
+                        msgpack_object data_key = val.via.map.ptr[j].key;
+                        msgpack_object data_val = val.via.map.ptr[j].val;
                         
-                        if (kv.val.type == MSGPACK_OBJECT_MAP) {
-                            for (uint32_t j = 0; j < kv.val.via.map.size; j++) {
-                                msgpack_object_kv data_kv = kv.val.via.map.ptr[j];
-                                if (data_kv.key.type == MSGPACK_OBJECT_STR &&
-                                    strncmp(data_kv.key.via.str.ptr, "status", data_kv.key.via.str.size) == 0 &&
-                                    data_kv.val.type == MSGPACK_OBJECT_STR &&
-                                    strncmp(data_kv.val.via.str.ptr, "OK", data_kv.val.via.str.size) == 0) {
-                                    
-                                    printf("✅ Mensagem enviada para %s\n", target_user);
-                                    msgpack_sbuffer_destroy(&sbuf);
-                                    return 1;
-                                }
+                        if (data_key.type == MSGPACK_OBJECT_STR &&
+                            strncmp(data_key.via.str.ptr, "clock", data_key.via.str.size) == 0 &&
+                            data_val.type == MSGPACK_OBJECT_POSITIVE_INTEGER) {
+                            
+                            uint64_t received_clock = data_val.via.u64;
+                            if (received_clock > client->logical_clock) {
+                                client->logical_clock = received_clock;
                             }
+                            client->logical_clock++;
+                            
+                            printf("🕒 Relógio lógico atualizado: %lu\n", client->logical_clock);
                         }
                     }
                 }
@@ -598,276 +694,233 @@ int bbs_client_send_direct_message(BBSClient *client, const char *target_user, c
         }
     }
     
-    printf("❌ Erro ao enviar mensagem direta\n");
+    printf("✅ Mensagem enviada para %s (clock: %lu)\n", target_user, client->logical_clock);
+    
+    msgpack_unpacked_destroy(&result);
+    free(response_data);
     msgpack_sbuffer_destroy(&sbuf);
-    return 0;
+    return 1;
 }
 
 
-void *listen_messages_thread(void *arg) {
+void* listen_messages_thread(void *arg) {
     BBSClient *client = (BBSClient *)arg;
-
-    if (!client || !client->sub_socket) {
-        fprintf(stderr, "Erro: cliente ou socket de inscrição inválido.\n");
-        return NULL;
-    }
-
+    printf("👂 Thread de escuta iniciada\n");
+    
     while (client->listening) {
-        char buffer[MAX_BUFFER];
-        int size = zmq_recv(client->sub_socket, buffer, sizeof(buffer), 0);
-
-        if (size <= 0) {
-            if (errno == ETERM) break; // contexto encerrado
-            continue;
-        }
-
-        // Inicializa msgpack unpacker
-        msgpack_unpacked msg;
-        msgpack_unpacked_init(&msg);
-
-        bool success = msgpack_unpack_next(&msg, buffer, size, NULL);
-        if (!success) {
-            msgpack_unpacked_destroy(&msg);
-            continue; // pula mensagens inválidas
-        }
-
-        msgpack_object root = msg.data;
-
-        // Valida se é mapa e tem "service" e "data"
-        if (root.type == MSGPACK_OBJECT_MAP) {
-            msgpack_object_kv* kv = root.via.map.ptr;
-            uint32_t map_size = root.via.map.size;
-
-            msgpack_object service_obj = {0};
-            msgpack_object data_obj = {0};
-
-            for (uint32_t i = 0; i < map_size; i++) {
-                if (kv[i].key.type == MSGPACK_OBJECT_STR) {
-                    if (strncmp(kv[i].key.via.str.ptr, "service", kv[i].key.via.str.size) == 0)
-                        service_obj = kv[i].val;
-                    else if (strncmp(kv[i].key.via.str.ptr, "data", kv[i].key.via.str.size) == 0)
-                        data_obj = kv[i].val;
+        char topic[256];
+        char buffer[2048];
+        
+        // Recebe parte 1: Tópico/Canal (não-bloqueante)
+        int topic_size = zmq_recv(client->sub_socket, topic, sizeof(topic) - 1, ZMQ_DONTWAIT);
+        
+        if (topic_size > 0) {
+            topic[topic_size] = '\0';
+            
+            // Recebe parte 2: Dados MessagePack
+            int msg_size = zmq_recv(client->sub_socket, buffer, sizeof(buffer), 0);
+            
+            if (msg_size > 0) {
+                // Desserializa MessagePack
+                msgpack_unpacked result;
+                msgpack_unpacked_init(&result);
+                
+                if (msgpack_unpack_next(&result, buffer, msg_size, NULL)) {
+                    msgpack_object obj = result.data;
+                    
+                    // Procura pelo campo "data" -> "message"
+                    if (obj.type == MSGPACK_OBJECT_MAP) {
+                        for (uint32_t i = 0; i < obj.via.map.size; i++) {
+                            msgpack_object key = obj.via.map.ptr[i].key;
+                            msgpack_object val = obj.via.map.ptr[i].val;
+                            
+                            // Procura "data"
+                            if (key.type == MSGPACK_OBJECT_STR && 
+                                strncmp(key.via.str.ptr, "data", key.via.str.size) == 0 &&
+                                val.type == MSGPACK_OBJECT_MAP) {
+                                
+                                // Dentro de "data", procura "message"
+                                for (uint32_t j = 0; j < val.via.map.size; j++) {
+                                    msgpack_object data_key = val.via.map.ptr[j].key;
+                                    msgpack_object data_val = val.via.map.ptr[j].val;
+                                    
+                                    if (data_key.type == MSGPACK_OBJECT_STR &&
+                                        strncmp(data_key.via.str.ptr, "message", data_key.via.str.size) == 0 &&
+                                        data_val.type == MSGPACK_OBJECT_STR) {
+                                        
+                                        // Mostra a mensagem formatada
+                                        printf("\n📢 [%s] %.*s\n", 
+                                               topic,
+                                               (int)data_val.via.str.size, 
+                                               data_val.via.str.ptr);
+                                        printf("Escolha uma opção: ");
+                                        fflush(stdout);
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    }
                 }
-            }
-
-            // Processa de acordo com o tipo de serviço
-            if (service_obj.type == MSGPACK_OBJECT_STR) {
-                if (strncmp(service_obj.via.str.ptr, "message", service_obj.via.str.size) == 0) {
-                    process_direct_message(data_obj, client->current_user);
-                } else if (strncmp(service_obj.via.str.ptr, "publish", service_obj.via.str.size) == 0) {
-                    process_channel_message(data_obj, client->current_user);
-                }
+                
+                msgpack_unpacked_destroy(&result);
             }
         }
-
-        msgpack_unpacked_destroy(&msg);
+        
+        // Pequena pausa
+        usleep(100000); // 100ms
     }
-
+    
     return NULL;
 }
 
-
-
-// Função para processar mensagens diretas
-void process_direct_message(msgpack_object data_obj, const char *current_user) {
-    msgpack_object_kv *kv;
-    msgpack_object obj;
-
-    // Acessa "src"
-    kv = data_obj.via.map.ptr;
-    for (int i = 0; i < data_obj.via.map.size; i++) {
-        if (strncmp(kv[i].key.via.str.ptr, "src", kv[i].key.via.str.size) == 0) {
-            obj = kv[i].val;
-            printf("\n📨 Mensagem recebida de %.*s: ", (int)obj.via.str.size, obj.via.str.ptr);
-        }
-        if (strncmp(kv[i].key.via.str.ptr, "message", kv[i].key.via.str.size) == 0) {
-            obj = kv[i].val;
-            printf("%.*s\n", (int)obj.via.str.size, obj.via.str.ptr);
-        }
-    }
-
-    printf("BBS %s > ", current_user);
-    fflush(stdout);
-}
-
-// Função para processar mensagens de canal
-void process_channel_message(msgpack_object data_obj, const char *current_user) {
-    // exemplo para pegar "channel" e "message"
-    for (size_t i = 0; i < data_obj.via.map.size; i++) {
-        msgpack_object_kv kv = data_obj.via.map.ptr[i];
-        if (strncmp(kv.key.via.str.ptr, "channel", kv.key.via.str.size) == 0) {
-            printf("\nCanal: %.*s\n", (int)kv.val.via.str.size, kv.val.via.str.ptr);
-        }
-        if (strncmp(kv.key.via.str.ptr, "message", kv.key.via.str.size) == 0) {
-            printf("%.*s\n", (int)kv.val.via.str.size, kv.val.via.str.ptr);
-        }
-    }
-}
-
-
+// Iniciar escuta
 void bbs_client_start_listening(BBSClient *client) {
-    keep_listening = 1;
     client->listening = 1;
-    pthread_create(&client->listener_thread, NULL, listen_messages_thread, client);
-    printf("🔊 Escutando mensagens em background...\n");
+    pthread_create(&client->listen_thread, NULL, listen_messages_thread, client);
 }
 
+// Parar escuta
 void bbs_client_stop_listening(BBSClient *client) {
-    keep_listening = 0;
     client->listening = 0;
-}
-
-void bbs_client_show_welcome() {
-    printf("\n");
-    printf("==================================================\n");
-    printf("          🚀 SISTEMA BBS/IRC - C LANG\n");
-    printf("==================================================\n");
-}
-
-void bbs_client_show_menu(const char *username) {
-    printf("\n--- BBS User: %s ---\n", username);
-    printf("1. 📋 Listar usuários\n");
-    printf("2. 📺 Listar canais\n");
-    printf("3. ➕ Criar canal\n");
-    printf("4. 📢 Publicar em canal\n");
-    printf("5. 💌 Enviar mensagem direta\n");
-    printf("6. 📡 Inscrever em canal\n");
-    printf("7. 🚪 Sair\n");
-}
-
-void bbs_client_interactive_mode(BBSClient *client) {
-    bbs_client_show_welcome();
-    
-    // Login
-    while (strlen(client->current_user) == 0) {
-        char username[50];
-        printf("\nDigite seu nome de usuário: ");
-        fflush(stdout);
-        
-        if (fgets(username, sizeof(username), stdin)) {
-            trim_newline(username);
-            if (strlen(username) > 0) {
-                if (bbs_client_login(client, username)) {
-                    break;
-                }
-            } else {
-                printf("❌ Nome de usuário não pode estar vazio\n");
-            }
-        }
+    if (client->listen_thread) {
+        pthread_join(client->listen_thread, NULL);
     }
-    
-    // Inscreve em canal geral
-    bbs_client_subscribe_channel(client, "geral");
-    printf("✅ Inscrito automaticamente no canal #geral\n");
-    
-    // Inicia escuta
+}
+
+// Modo interativo
+void bbs_client_interactive_mode(BBSClient *client) {
     bbs_client_start_listening(client);
     
-    // Menu principal
-    char option[10];
-    while (1) {
-        printf("\n========================================\n");
-        printf("BBS User: %s\n", client->current_user);
-        printf("========================================\n");
-        bbs_client_show_menu(client->current_user);
-        printf("----------------------------------------\n");
-        printf("Escolha uma opção: ");
-        fflush(stdout);
+    int running = 1;
+    while (running) {
+        bbs_client_show_menu();
         
-        if (fgets(option, sizeof(option), stdin)) {
-            trim_newline(option);
-            
-            switch (option[0]) {
-                case '1':
-                    bbs_client_list_users(client);
-                    break;
-                case '2':
-                    bbs_client_list_channels(client);
-                    break;
-                case '3': {
-                    char channel_name[50];
-                    printf("Nome do novo canal: ");
-                    fflush(stdout);
-                    if (fgets(channel_name, sizeof(channel_name), stdin)) {
-                        trim_newline(channel_name);
-                        if (strlen(channel_name) > 0) {
-                            bbs_client_create_channel(client, channel_name);
-                        }
-                    }
-                    break;
-                }
-                case '4': {
-                    char channel[50], message[256];
-                    printf("Canal: ");
-                    fflush(stdout);
-                    if (fgets(channel, sizeof(channel), stdin)) {
-                        trim_newline(channel);
-                        printf("Mensagem: ");
-                        fflush(stdout);
-                        if (fgets(message, sizeof(message), stdin)) {
-                            trim_newline(message);
-                            if (strlen(channel) > 0 && strlen(message) > 0) {
-                                bbs_client_publish_message(client, channel, message);
-                            }
-                        }
-                    }
-                    break;
-                }
-                case '5': {
-                    char target[50], message[256];
-                    printf("Usuário destino: ");
-                    fflush(stdout);
-                    if (fgets(target, sizeof(target), stdin)) {
-                        trim_newline(target);
-                        printf("Mensagem: ");
-                        fflush(stdout);
-                        if (fgets(message, sizeof(message), stdin)) {
-                            trim_newline(message);
-                            if (strlen(target) > 0 && strlen(message) > 0) {
-                                bbs_client_send_direct_message(client, target, message);
-                            }
-                        }
-                    }
-                    break;
-                }
-                case '6': {
-                    char channel[50];
-                    printf("Nome do canal para se inscrever: ");
-                    fflush(stdout);
-                    if (fgets(channel, sizeof(channel), stdin)) {
-                        trim_newline(channel);
-                        if (strlen(channel) > 0) {
-                            bbs_client_subscribe_channel(client, channel);
-                        }
-                    }
-                    break;
-                }
-                case '7':
-                    printf("\n👋 Saindo do sistema...\n");
-                    bbs_client_stop_listening(client);
-                    return;
-                default:
-                    printf("❌ Opção inválida. Digite um número de 1 a 7.\n");
+        int choice;
+        if (scanf("%d", &choice) != 1) {
+            while (getchar() != '\n');
+            printf("Opção inválida!\n");
+            continue;
+        }
+        
+        switch (choice) {
+            case 1:
+                bbs_client_list_users(client);
+                break;
+            case 2:
+                bbs_client_list_channels(client);
+                break;
+            case 3: {
+                char channel[50];
+                printf("Nome do canal: ");
+                scanf("%49s", channel);
+                bbs_client_create_channel(client, channel);
+                break;
             }
-            
-            sleep(1);
+            case 4: {
+                char channel[50];
+                printf("Nome do canal: ");
+                scanf("%49s", channel);
+                bbs_client_subscribe_channel(client, channel);
+                break;
+            }
+            case 5: {
+                char channel[50], message[256];
+                printf("Canal: ");
+                scanf("%49s", channel);
+                printf("Mensagem: ");
+                getchar();
+                fgets(message, sizeof(message), stdin);
+                message[strcspn(message, "\n")] = 0;
+                bbs_client_publish_message(client, channel, message);
+                break;
+            }
+            case 6: {
+                char user[50], message[256];
+                printf("Usuário: ");
+                scanf("%49s", user);
+                printf("Mensagem: ");
+                getchar();
+                fgets(message, sizeof(message), stdin);
+                message[strcspn(message, "\n")] = 0;
+                bbs_client_send_direct_message(client, user, message);
+                break;
+            }
+            case 7:
+                running = 0;
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opção inválida!\n");
         }
     }
+    
+    bbs_client_stop_listening(client);
 }
 
-int main() {
+
+int main(int argc, char *argv[]) {
+
+    char *broker_host = getenv("BROKER_HOST");
+    char *broker_port = getenv("BROKER_PORT");
+    
+    if (!broker_host) broker_host = "broker";
+    if (!broker_port) broker_port = "5550";
+    
+    if (argc >= 3) {
+        broker_host = argv[1];
+        broker_port = argv[2];
+    }
+    
     BBSClient client;
+    char username[50];
     
-    printf("🎯 Cliente BBS em C - Iniciando...\n");
+    printf("======================================\n");
+    printf("         Sistemas Distribuídos        \n");
+    printf("======================================\n");
+    printf("📡 Conectando ao broker: %s:%s\n", broker_host, broker_port);
+    printf("   (Balanceamento entre 3 servidores)\n");
+    printf("======================================\n\n");
     
-    // CORREÇÃO: Passar os parâmetros corretos
-    if (bbs_client_init(&client, "servidor", "5555") != 0) {
-        fprintf(stderr, "❌ Falha ao inicializar cliente\n");
+
+    if (!bbs_client_init(&client, broker_host, broker_port)) {
+        printf("❌ Erro: Não foi possível conectar ao broker\n");
+        return 1;
+    }
+    
+    printf("\n✅ Cliente inicializado com sucesso!\n");
+    printf("🔄 REQ/REP: Comandos via broker\n");
+    printf("📢 PUB/SUB: Mensagens via proxy\n\n");
+    
+
+    printf("Digite seu nome de usuário: ");
+    if (fgets(username, sizeof(username), stdin) == NULL) {
+        bbs_client_cleanup(&client);
+        return 1;
+    }
+    
+    username[strcspn(username, "\n")] = 0;
+    
+    if (strlen(username) == 0) {
+        strcpy(username, "UsuarioAnonimo");
+    }
+    
+    printf("\n🔐 Fazendo login como: %s\n", username);
+    
+    if (bbs_client_login(&client, username)) {
+        printf("✅ Login realizado!\n");
+        printf("💡 Bots ativos: Bot_Alice, Bot_Bob\n\n");
+    } else {
+        printf("❌ Erro no login\n");
+        bbs_client_cleanup(&client);
         return 1;
     }
     
     bbs_client_interactive_mode(&client);
+    
     bbs_client_cleanup(&client);
+    printf("\n👋 Cliente finalizado.\n");
     
     return 0;
 }

@@ -1,16 +1,21 @@
-# referencia/Dockerfile_referencia
-FROM node:20-slim
+FROM node:20
 
 WORKDIR /app
 
-# Copia o script
+RUN apt-get update && apt-get install -y \
+    python3 \
+    make \
+    g++ \
+    libzmq3-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY package*.json ./
+
+RUN npm install
+
 COPY referencia.js .
 
-# Inicializa o npm e instala dependências necessárias
-RUN npm init -y && npm install zeromq @msgpack/msgpack
-
-# Expõe a porta
 EXPOSE 6000
 
-# Comando para rodar o servidor
 CMD ["node", "referencia.js"]

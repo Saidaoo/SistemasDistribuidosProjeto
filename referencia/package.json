@@ -1,0 +1,13 @@
+{
+  "name": "bbs-referencia",
+  "version": "1.0.0",
+  "description": "Servidor de Referência BBS",
+  "main": "referencia.js",
+  "scripts": {
+    "start": "node referencia.js"
+  },
+  "dependencies": {
+    "zeromq": "^6.0.0-beta.19",
+    "@msgpack/msgpack": "^3.0.0"
+  }
+}

@@ -333,5 +333,55 @@
     "user": "Bob",
     "timestamp": "2025-11-12T22:27:04",
     "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": "2025-11-15T05:29:15",
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": "2025-11-16T03:01:51",
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": "2025-11-16T03:16:50",
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": "2025-11-16T04:05:25",
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": "2025-11-16T04:19:39",
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": 1763310332,
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": 1763310766,
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": 1763312005,
+    "type": "login"
+  },
+  {
+    "user": "UsuarioAnonimo",
+    "timestamp": 1763312269,
+    "type": "login"
+  },
+  {
+    "user": "UsuarioAnonimo",
+    "timestamp": 1763312400,
+    "type": "login"
   }
 ]

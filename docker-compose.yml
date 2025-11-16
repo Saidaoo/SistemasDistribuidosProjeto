@@ -1,54 +1,162 @@
+version: '3.8'
+
 services:
-  servidor:
-    build: 
-      context: ./reqrep
-      dockerfile: Dockerfile_servidor
-    container_name: bbs-servidor
-    ports:
-      - "5555:5555"
-    networks:
-      - chat_network
-    volumes:
-      - ./reqrep/data:/app/data
-
-  proxy:
-    build: ./proxy
-    container_name: bbs-proxy
-    ports:
-      - "5557:5557"
-      - "5558:5558"
-    networks:
-      - chat_network
-
-  cliente-c:
-    build:
-      context: ./reqrep
-      dockerfile: Dockerfile_cliente_c
-    container_name: bbs-cliente-c
-    networks:
-      - chat_network
-    depends_on:
-      - servidor
-      - proxy
-    stdin_open: true
-    tty: true
-    environment:
-      - SERVER_HOST=servidor
-      - SERVER_PORT=5555
-      - PROXY_XSUB=proxy:5557
-      - PROXY_XPUB=proxy:5558
-
   referencia:
     build:
       context: ./referencia
       dockerfile: Dockerfile_referencia
-    container_name: bbs-referencia
+    container_name: referencia
+    networks:
+      - bbs_network
     ports:
       - "6000:6000"
+    command: node referencia.js
+    restart: unless-stopped
+
+  server_1:
+    build:
+      context: ./reqrep
+      dockerfile: Dockerfile_servidor
+    container_name: server_1
+    environment:
+      - SERVER_NAME=server_1
+      - REFERENCE_HOST=referencia
+      - PROXY_HOST=proxy
     networks:
-      - chat_network   # ✅ Aqui é separado, no mesmo nível de cliente-c
-  
+      - bbs_network
+    ports:
+      - "5555:5555"
+    volumes:
+      - ./reqrep/data/server_1:/app/data
+    depends_on:
+      - referencia
+      - proxy
+    command: python servidor.py
+    restart: unless-stopped
+
+  server_2:
+    build:
+      context: ./reqrep
+      dockerfile: Dockerfile_servidor
+    container_name: server_2
+    environment:
+      - SERVER_NAME=server_2
+      - REFERENCE_HOST=referencia
+      - PROXY_HOST=proxy
+    networks:
+      - bbs_network
+    ports:
+      - "5556:5556"
+    volumes:
+      - ./reqrep/data/server_2:/app/data
+    depends_on:
+      - referencia
+      - proxy
+    command: python servidor.py
+    restart: unless-stopped
+
+  server_3:
+    build:
+      context: ./reqrep
+      dockerfile: Dockerfile_servidor
+    container_name: server_3
+    environment:
+      - SERVER_NAME=server_3
+      - REFERENCE_HOST=referencia
+      - PROXY_HOST=proxy
+    networks:
+      - bbs_network
+    ports:
+      - "5559:5559"
+    volumes:
+      - ./reqrep/data/server_3:/app/data
+    depends_on:
+      - referencia
+      - proxy
+    command: python servidor.py
+    restart: unless-stopped
+
+  broker:
+    build:
+      context: ./broker
+      dockerfile: Dockerfile
+    container_name: broker
+    networks:
+      - bbs_network
+    ports:
+      - "5550:5550"
+    depends_on:
+      - server_1
+      - server_2
+      - server_3
+    command: python broker.py
+    restart: unless-stopped
+
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    container_name: proxy
+    networks:
+      - bbs_network
+    ports:
+      - "5557:5557"
+      - "5558:5558"
+    command: python proxy.py
+    restart: unless-stopped
+
+  cliente:
+    build:
+      context: ./reqrep
+      dockerfile: Dockerfile_cliente_c
+    container_name: cliente_bbs
+    environment:
+      - BROKER_HOST=broker
+      - BROKER_PORT=5550
+      - PROXY_HOST=proxy
+      - PROXY_PORT=5558
+    networks:
+      - bbs_network
+    depends_on:
+      - broker
+      - proxy
+    stdin_open: true
+    tty: true
+    restart: "no"
+
+  bot_alice:
+    build:
+      context: ./bots
+      dockerfile: Dockerfile_bot
+    container_name: bot_alice
+    environment:
+      - BOT_NAME=Bot_Alice
+      - PROXY_HOST=proxy
+      - PROXY_PUB_PORT=5557
+      - PROXY_SUB_PORT=5558
+    networks:
+      - bbs_network
+    depends_on:
+      - proxy
+    restart: unless-stopped
+
+  bot_bob:
+    build:
+      context: ./bots
+      dockerfile: Dockerfile_bot
+    container_name: bot_bob
+    environment:
+      - BOT_NAME=Bot_Bob
+      - PROXY_HOST=proxy
+      - PROXY_PUB_PORT=5557
+      - PROXY_SUB_PORT=5558
+    networks:
+      - bbs_network
+    depends_on:
+      - proxy
+    restart: unless-stopped
 
 networks:
-  chat_network:
+  bbs_network:
     driver: bridge
+    name: bbs_distributed_network

@@ -1,28 +1,21 @@
-FROM gcc:latest
+FROM debian:stable-slim
 
 WORKDIR /app
 
-# Instala as dependências necessárias
-RUN apt-get update && apt-get install -y \
-    libzmq3-dev \
-    libmsgpack-c-dev \
-    pkg-config \
+RUN apt update && apt install -y \
+    gcc \
+    make \
     cmake \
-    git \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    pkg-config \
+    libzmq3-dev \
+    libmsgpack-dev \
+    libc-dev \
+    build-essential \
+    && apt clean
 
-# Copia os arquivos do cliente para dentro do container
-COPY . .
+COPY cliente.c .
+COPY cliente.h .
 
-# Compila o cliente com as bibliotecas corretas
 RUN gcc -o cliente cliente.c -lzmq -lmsgpack-c -lpthread
 
-
-# Apenas debug: mostra as portas que o cliente usa
-ENV SERVER_PORT=5555
-ENV PROXY_XSUB_PORT=5565
-ENV PROXY_XPUB_PORT=5568
-
-CMD echo "🚀 Iniciando cliente..." && \
-    echo "🔌 SERVER_PORT=$SERVER_PORT | XSUB=$PROXY_XSUB_PORT | XPUB=$PROXY_XPUB_PORT" && \
-    ./cliente
+CMD ["./cliente"]

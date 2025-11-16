@@ -1,15 +1,12 @@
-# pubsub/subscriber.py
 import zmq
 import json
 
 def test_subscriber():
     context = zmq.Context()
     
-    # Conecta no proxy XPUB
     socket = context.socket(zmq.SUB)
     socket.connect("tcp://proxy:5558")
-    
-    # Inscreve em todos os tópicos
+
     socket.setsockopt_string(zmq.SUBSCRIBE, "")
     
     print("👂 Subscriber de teste conectado ao proxy")

@@ -1,4 +1,3 @@
-# pubsub/publisher.py
 import zmq
 import time
 import json
@@ -7,14 +6,12 @@ from datetime import datetime
 def test_publisher():
     context = zmq.Context()
     
-    # Conecta no proxy XSUB
     socket = context.socket(zmq.PUB)
     socket.connect("tcp://proxy:5557")
     
     print("🚀 Publisher de teste conectado ao proxy")
-    time.sleep(1)  # Aguarda conexão
+    time.sleep(1)
     
-    # Publica mensagens de teste
     topics = ["general", "tech", "news"]
     
     for i in range(10):

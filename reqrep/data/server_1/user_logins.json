@@ -1,0 +1,126 @@
+[
+  {
+    "user": "Vinicius",
+    "timestamp": 1763318232,
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": 1763318550,
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": 1763318869,
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": 1763319187,
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": 1763319517,
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": 1763319608,
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": 1763320510,
+    "type": "login"
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": 1763320648,
+    "type": "login"
+  },
+  {
+    "user": "usuario_teste",
+    "timestamp": 1763322789.8862817,
+    "type": "login",
+    "clock": 2
+  },
+  {
+    "user": "user_SERVER_1",
+    "timestamp": 1763322899.2570064,
+    "type": "login",
+    "clock": 11
+  },
+  {
+    "user": "user_sync_1763332091",
+    "timestamp": 1763332091.7094512,
+    "type": "login",
+    "clock": 101
+  },
+  {
+    "user": "usuario_teste",
+    "timestamp": 1763333031.4715436,
+    "type": "login",
+    "clock": 1
+  },
+  {
+    "user": "teste_lamport",
+    "timestamp": null,
+    "type": "login",
+    "clock": 5
+  },
+  {
+    "user": "usuario_servidor_1",
+    "timestamp": 1763333292.4252982,
+    "type": "login",
+    "clock": 22
+  },
+  {
+    "user": "teste_lamport",
+    "timestamp": null,
+    "type": "login",
+    "clock": 27
+  },
+  {
+    "user": "usuario_servidor_1",
+    "timestamp": 1763333393.4089758,
+    "type": "login",
+    "clock": 46
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": 1763333689,
+    "type": "login",
+    "clock": 57
+  },
+  {
+    "user": "Vinicius",
+    "timestamp": 1763336586,
+    "type": "login",
+    "clock": 2
+  },
+  {
+    "user": "test_user_5555_1",
+    "timestamp": 1763336897.6819067,
+    "type": "login",
+    "clock": 15
+  },
+  {
+    "user": "test_user_5555_2",
+    "timestamp": 1763336897.9894989,
+    "type": "login",
+    "clock": 17
+  },
+  {
+    "user": "test_user_5555_3",
+    "timestamp": 1763336898.297663,
+    "type": "login",
+    "clock": 19
+  },
+  {
+    "user": "sync_test_user_1763337117",
+    "timestamp": 1763337118.033578,
+    "type": "login",
+    "clock": 39
+  }
+]

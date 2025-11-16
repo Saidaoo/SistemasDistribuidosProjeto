@@ -1,0 +1,10 @@
+[
+  {
+    "channel": "teste",
+    "message": "Ola mundo!",
+    "user": "usuario_teste",
+    "timestamp": 1763333031.488749,
+    "clock": 4,
+    "server": "server_1"
+  }
+]

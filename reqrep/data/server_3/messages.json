@@ -1,0 +1,26 @@
+[
+  {
+    "channel": "geral",
+    "message": "Mensagem autom\u00e1tica do bot!",
+    "user": "bot_automatico",
+    "timestamp": 1763333132.1262562,
+    "clock": 4,
+    "server": "server_3"
+  },
+  {
+    "channel": "teste",
+    "message": "Ol\u00e1 mundo!",
+    "user": "usuario_teste",
+    "timestamp": 1763333031.488749,
+    "clock": 4,
+    "server": "server_1"
+  },
+  {
+    "channel": "teste",
+    "message": "Ola mundo!",
+    "user": "usuario_teste",
+    "timestamp": 1763333031.488749,
+    "clock": 4,
+    "server": "server_1"
+  }
+]
