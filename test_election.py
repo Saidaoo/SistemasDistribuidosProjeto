@@ -1,15 +1,8 @@
-#!/usr/bin/env python3
-"""
-Teste de Eleição de Coordenador (Algoritmo Bully)
-Valida critério 4: eleição de coordenador
-"""
-
 import zmq
 import msgpack
 import time
 
 def trigger_election(server_port):
-    """Força eleição em um servidor específico"""
     context = zmq.Context()
     socket = context.socket(zmq.REQ)
     socket.setsockopt(zmq.RCVTIMEO, 10000)
@@ -49,7 +42,6 @@ def trigger_election(server_port):
         context.term()
 
 def check_coordinator(server_port):
-    """Verifica qual é o coordenador atual"""
     context = zmq.Context()
     socket = context.socket(zmq.REQ)
     socket.setsockopt(zmq.RCVTIMEO, 10000)
@@ -101,7 +93,6 @@ if __name__ == "__main__":
     print("\n⏳ Aguardando servidores ficarem prontos (3 segundos)...")
     time.sleep(3)
     
-    # 1. Verifica estado inicial
     print("\n📋 ETAPA 1: Estado inicial dos servidores")
     print("-" * 60)
     
@@ -111,7 +102,6 @@ if __name__ == "__main__":
     
     time.sleep(2)
     
-    # 2. Dispara eleição no server_3 (porta 5559, rank mais alto)
     print("\n🗳️  ETAPA 2: Disparando eleição no server_3 (porta 5559, rank 3)")
     print("-" * 60)
     success = trigger_election(5559)
@@ -120,7 +110,6 @@ if __name__ == "__main__":
         print("\n⏳ Aguardando eleição completar (5 segundos)...")
         time.sleep(5)
         
-        # 3. Verifica novo coordenador
         print("\n👑 ETAPA 3: Verificando novo coordenador")
         print("-" * 60)
         for port in server_ports:

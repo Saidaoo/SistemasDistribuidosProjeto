@@ -1,23 +1,14 @@
-#!/usr/bin/env python3
-"""
-Teste de Relógio Lógico (Lamport)
-Valida critério 1 (cliente) e critério 4 (servidor)
-"""
-
 import zmq
 import msgpack
 import time
 
-def test_clock_increment():
-    """Testa incremento do relógio lógico"""
-    
+def test_clock_increment():    
     print("🕐 Testando incremento de relógio lógico...")
     print("-" * 60)
     
     clocks_sent = []
     clocks_received = []
     
-    # Testa com cada servidor
     server_ports = [5555, 5556, 5559]
     
     for port in server_ports:
@@ -33,9 +24,8 @@ def test_clock_increment():
             print(f"\n📡 Testando servidor na porta {port}:")
             print("-" * 40)
             
-            # Envia 3 mensagens consecutivas para este servidor
             for i in range(1, 4):
-                clock_value = i + (port - 5555) * 10  # Clock único por servidor
+                clock_value = i + (port - 5555) * 10
                 
                 msg = {
                     "service": "login",

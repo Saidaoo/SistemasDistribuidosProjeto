@@ -1,18 +1,11 @@
-#!/usr/bin/env python3
-"""
-Teste de Sincronização de Dados entre Servidores
-Valida critério 4: sincronização de dados
-"""
-
 import zmq
 import msgpack
 import time
 
 def get_data_stats(server_port):
-    """Obtém estatísticas de dados de um servidor"""
     context = zmq.Context()
     socket = context.socket(zmq.REQ)
-    socket.setsockopt(zmq.RCVTIMEO, 15000)  # 15 segundos
+    socket.setsockopt(zmq.RCVTIMEO, 15000)
     socket.setsockopt(zmq.LINGER, 0)
     
     try:
@@ -42,7 +35,6 @@ def get_data_stats(server_port):
         context.term()
 
 def create_user(server_port, username):
-    """Cria usuário diretamente em um servidor"""
     context = zmq.Context()
     socket = context.socket(zmq.REQ)
     socket.setsockopt(zmq.RCVTIMEO, 10000)
@@ -80,7 +72,6 @@ if __name__ == "__main__":
     
     server_ports = [5555, 5556, 5559]
     
-    # 1. Estado inicial
     print("\n📊 ETAPA 1: Contagem inicial de dados")
     print("-" * 60)
     
@@ -97,7 +88,6 @@ if __name__ == "__main__":
     
     time.sleep(2)
     
-    # 2. Cria usuário no coordenador (server_1)
     print("\n👤 ETAPA 2: Criando usuário 'sync_test_user' no server_1 (coordenador)")
     print("-" * 60)
     success = create_user(5555, "sync_test_user_" + str(int(time.time())))
@@ -107,13 +97,11 @@ if __name__ == "__main__":
         print("\n❌ Falha ao criar usuário")
         exit(1)
     
-    # 3. Aguarda sincronização
     print("\n⏳ ETAPA 3: Aguardando sincronização automática (8 segundos)")
     print("-" * 60)
     print("   💡 O coordenador deve sincronizar dados após o login")
     time.sleep(8)
     
-    # 4. Verifica sincronização
     print("\n📊 ETAPA 4: Verificando sincronização")
     print("-" * 60)
     
@@ -127,7 +115,6 @@ if __name__ == "__main__":
             count = stats.get('users', 0)
             user_counts.append(count)
             
-            # Mostra mudança
             old_count = initial_stats.get(port, {}).get('users', 0)
             change = count - old_count
             
@@ -136,7 +123,6 @@ if __name__ == "__main__":
             print(f"      Depois: {count} usuários")
             print(f"      {'📈' if change > 0 else '➡️ '} Mudança: +{change}")
     
-    # Verifica se todos têm o mesmo número
     if user_counts:
         all_synced = len(set(user_counts)) == 1
         
@@ -153,7 +139,6 @@ if __name__ == "__main__":
         
         print("\n✅ TESTE CONCLUÍDO!")
         
-        # Sugestões de verificação
         print("\n💡 Para verificar sincronização nos logs:")
         print("   docker compose logs server_1 | Select-String 'sincronização'")
         print("   docker compose logs server_2 | Select-String 'sincronização'")

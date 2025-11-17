@@ -1,10 +1,8 @@
-#!/usr/bin/env python3
 import zmq, msgpack, time
 
 print("🎯 Forçando Sincronização Berkeley")
 print("=" * 60)
 
-# Conecta no server_1 (coordenador)
 ctx = zmq.Context()
 s = ctx.socket(zmq.REQ)
 s.setsockopt(zmq.RCVTIMEO, 5000)

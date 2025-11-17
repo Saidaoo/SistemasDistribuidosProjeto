@@ -1,23 +1,16 @@
-#!/usr/bin/env python3
-"""
-Teste de Sincronização Berkeley
-Valida critério 4: sincronização de relógio
-"""
-
 import zmq
 import msgpack
 import time
 
 def get_cluster_status(server_port):
-    """Obtém status completo do cluster"""
     context = zmq.Context()
     socket = context.socket(zmq.REQ)
-    socket.setsockopt(zmq.RCVTIMEO, 15000)  # 15 segundos
+    socket.setsockopt(zmq.RCVTIMEO, 15000)
     socket.setsockopt(zmq.LINGER, 0)
     
     try:
         socket.connect(f"tcp://localhost:{server_port}")
-        time.sleep(1)  # Aguarda conexão
+        time.sleep(1)
         
         msg = {
             "service": "cluster_status",
@@ -41,7 +34,6 @@ def get_cluster_status(server_port):
         context.term()
 
 def send_messages_to_trigger_sync(server_port, count=10):
-    """Envia mensagens diretamente ao servidor para disparar sincronização"""
     context = zmq.Context()
     socket = context.socket(zmq.REQ)
     socket.setsockopt(zmq.RCVTIMEO, 10000)
@@ -85,7 +77,6 @@ if __name__ == "__main__":
     
     server_ports = [5555, 5556, 5559]
     
-    # 1. Estado inicial
     print("\n📊 ETAPA 1: Estado inicial dos servidores")
     print("-" * 60)
     
@@ -107,11 +98,9 @@ if __name__ == "__main__":
     
     time.sleep(2)
     
-    # 2. Envia 10 mensagens para o coordenador
     print("\n📨 ETAPA 2: Enviando 10 mensagens para disparar sincronização")
     print("-" * 60)
     
-    # Encontra o coordenador
     coordinator_port = None
     for port, status in initial_states.items():
         if status.get('is_coordinator'):
@@ -129,7 +118,6 @@ if __name__ == "__main__":
         print("\n⏳ Aguardando sincronização Berkeley completar (5 segundos)...")
         time.sleep(5)
         
-        # 3. Verifica estado após sincronização
         print("\n📊 ETAPA 3: Estado após sincronização Berkeley")
         print("-" * 60)
         
@@ -141,7 +129,6 @@ if __name__ == "__main__":
                 print(f"      Offset físico: {status['physical_offset']}")
                 print(f"      Contador msgs: {status['message_count']}")
                 
-                # Compara com estado inicial
                 if port in initial_states:
                     old_offset = initial_states[port]['physical_offset']
                     new_offset = status['physical_offset']
