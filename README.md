@@ -104,6 +104,7 @@ Todos os critérios de avaliação foram implementados e testados:
 
 ## 👥 Autores
 
-Nome: Vinícius Saidi de Araújo Soares R.A: 22.122.064-3
+Nome: Vinícius Saidi de Araújo Soares 
+R.A: 22.122.064-3
 
 Novembro 2025 - FEI
